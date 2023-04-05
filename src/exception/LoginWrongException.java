@@ -1,7 +1,7 @@
 package exception;
 /**
+ * 작성자 : 서지수
  * 로그인 오류 시 예외처리
- * @author Seojisoo
  *
  */
 public class LoginWrongException extends RuntimeException{
