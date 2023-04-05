@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.replydto.*;
 import exception.*;
 
 /**
@@ -16,13 +17,24 @@ public interface BoardDAO {
 	 * select * from boarddto;
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
-	
 	/**
 	 * 레코드 유저 아이디별 검색
 	 * select * from boarddto where userId=?;
 	 */
 	BoardDTO boardSelectByUserId(int userId) throws SearchWrongException;
 	
+	/**
+	 * 레코드 게시판별 검색
+	 * select * from boarddto where subject='?';
+	 */
+	List<BoardDTO> boardSelectBySubject(String subject) throws SearchWrongException;
+
+	/**
+	 * 레코드 키워드로 검색
+	 * select * from boarddto where like '%?%';
+	 */
+	List<BoardDTO> boardSelectByKeyword(String keyWord) throws SearchWrongException;
+
 	/**
 	 * 레코드 좋아요수 순서대로 검색
 	 */
@@ -39,17 +51,30 @@ public interface BoardDAO {
 	 * values (board_seq.nextval, ?, ?, ?,?,?,?,?,?, sysdate,?,?)
 	 */
 	int boardInsert(BoardDTO boardDTO) throws DMLException;
-	
+
 	/**
 	 * 글번호에 해당하는 게시물 내용 수정하기
 	 * update boarddto set content = ? where board_no = ?
 	 */
 	int boardUpdate(BoardDTO boardDTO) throws DMLException;
-	
+
 	/**
 	 * 글번호에 해당하는 레코드 삭제
 	 * delete from boarddto where board_no = ?
 	 */
 	int boardDelete(int boardNo) throws DMLException;
+
+	/**
+	 * 댓글 입력
+	 */
+	int replyInsert(ReplyDTO replyDTO) throws DMLException ;
+
+	/**
+	 * 부모 글에 대한 댓글 
+	 */
+	List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException;
+
+	
+	
 	
 }
