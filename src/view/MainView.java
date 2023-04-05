@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 import controller.BoardController;
 import dto.boarddto.BoardDTO;
-import dto.userdto.UserSession;
+import dto.userdto.UserSesseion;
 
 public class MainView {
 	static Scanner sc = new Scanner(System.in);
-	static UserSession userSession;
+	static UserSesseion userSesseion;
 
 	/**
 	 * 메뉴 선택 (동작 선택)
 	 */
-	public static void menuChoice(UserSession sesseion) {
-		userSession = sesseion;
+	public static void menuChoice(UserSesseion sesseion) {
+		userSesseion = sesseion;
 
 		System.out.println("메인뷰 단 세션 : " + sesseion);
 		while (true) {
@@ -27,7 +27,7 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 마이페이지   ");
 			System.out.print(selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
-			if (userSession.isAdmin()) System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
+			if (userSesseion.isAdmin()) System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
 			System.out.print(selectionIndex++ + ". 앱 종료 ]");
 
 			System.out.println("\n--------------------------------------------");
@@ -131,7 +131,7 @@ public class MainView {
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-		BoardDTO board = new BoardDTO(title, content, userSession.getNickName(), userSession.getUuid(), subject);
+		BoardDTO board = new BoardDTO(title, content, userSesseion.getNickName(), userSesseion.getUuid(), subject);
 		board.setTag(null);
 		BoardController.boardInsert(board);
 	}
