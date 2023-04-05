@@ -18,6 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	private static BoardService instance = new BoardServiceImpl();
 	
 	private BoardDAO boardDAO = BoardDAOImpl.getInstance();
+
 	
 	private BoardServiceImpl() {}
 	public static BoardService getInstance() {
@@ -28,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDTO> boardSelectAll() throws SearchWrongException {
 		List<BoardDTO> boardList = boardDAO.boardSelectAll();
 		if(boardList.size()==0)
-			throw new SearchWrongException("조회할 수 있는 게시글이 없습니다.");
+			throw new SearchWrongException("아직 게시글이 없습니다...");
 		
 		return boardList;
 	}
@@ -36,7 +37,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDTO> boardSelectBySubject(String subject) throws SearchWrongException {
 		List<BoardDTO> list = boardDAO.boardSelectBySubject(subject);
-		if(list.isEmpty()) throw new SearchWrongException(subject+"게시판의 게시글이 없습니다.");
+		if(list.isEmpty()) throw new SearchWrongException(subject+"게시판의 게시글이 아직 없습니다...");
 		return list;
 	}
 

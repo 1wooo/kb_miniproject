@@ -3,11 +3,13 @@ package view;
 import java.util.Scanner;
 
 import controller.LoginController;
+import dto.userdto.UserSesseion;
 
 public class LoginView {
 	static Scanner sc = new Scanner(System.in);
+	static UserSesseion userSesseion;
 
-	public static void loginChoice() {
+	public static UserSesseion loginChoice() {
 		while (true) {
 			System.out.println("\n----------------------------------------");
 			System.out.print("[ 1. 로그인   ");
@@ -21,7 +23,7 @@ public class LoginView {
 				switch (menu) {
 				case 1:
 					signIn();
-					return;
+					return userSesseion;
 				case 2:
 					signUp();
 					break;
@@ -49,8 +51,8 @@ public class LoginView {
 			System.out.println("비밀번호를 입력해주세요.");
 			String pw = sc.nextLine();
 
-//			LoginController.signIn(id, pw);
-		
+			userSesseion = LoginController.signIn(id, pw);
+
 		} catch (Exception e) {
 			System.out.println("다시 시도하시겠습니까? yes / no");
 			String choice = sc.nextLine();
@@ -61,7 +63,7 @@ public class LoginView {
 				System.out.println("앱을 종료합니다.");
 				System.exit(0);
 			}
-		} 
+		}
 	}
 	
 	/** 
@@ -74,8 +76,10 @@ public class LoginView {
 			String id = sc.nextLine();
 			System.out.println("비밀번호를 입력해주세요.");
 			String pw = sc.nextLine();
+			System.out.println("닉네임을 입력해주세요.");
+			String nickName = sc.nextLine();
 
-//			LoginController.signIn(id, pw);
+			LoginController.signUp(id, pw, nickName);
 			// test code
 			throw new Exception();
 		} catch (Exception e) {
