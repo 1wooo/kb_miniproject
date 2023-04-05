@@ -2,17 +2,17 @@ package dto.userdto;
 
 public class UserDTO {
     private int uuid;
-    private String userid;
-    private String password;
-    private String nickname;
+    private String user_id;
+    private String pass_word;
+    private String nick_name;
     private boolean isAdmin;
     public UserDTO(){}
 
-    public UserDTO(int uuid, String userid, String password, String nickname, boolean isAdmin) {
+    public UserDTO(int uuid, String user_id, String pass_word, String nick_name, boolean isAdmin) {
         this.uuid = uuid;
-        this.userid = userid;
-        this.password = password;
-        this.nickname = nickname;
+        this.user_id = user_id;
+        this.pass_word = pass_word;
+        this.nick_name = nick_name;
         this.isAdmin = isAdmin;
     }
 
