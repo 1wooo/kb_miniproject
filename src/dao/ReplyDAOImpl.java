@@ -7,10 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dto.boarddto.BoardDTO;
+import dto.replydto.QuestionReply;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
-import kb.mvc.common.DBManager;
+import common.DBManager;
 
 public class ReplyDAOImpl implements ReplyDAO {
 
@@ -24,58 +26,121 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	
 	/**
-	 * 게시글별 댓글 조회
-	 * select * from board join reply using(board_no)  where board_no=?
+	 * 댓글 게시글별검색
+	 * select * from reply where board_no=?;
 	 */
 	@Override
-	public List<ReplyDTO> replySelectByBoardNo(int boardNo) throws SearchWrongException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	private List<ReplyDTO> replySelect(Connection con, int boardNo)throws SearchWrongException{
-		 PreparedStatement ps =null;
-		 ResultSet rs =null;
-		 List<ReplyDTO> repliesList = new ArrayList<>();
-		 String sql="select * from reply where board_no=?";
+	public List<ReplyDTO> replySelectByBoardNo(int boardNo) throws SearchWrongException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		List<ReplyDTO> list = new ArrayList<ReplyDTO>(); //리턴값
+		String sql= "select * from reply where board_no=?";
 		try {
-		    ps = con.prepareStatement(sql);
-		    ps.setInt(1, boardNo);
-		    
-		    rs = ps.executeQuery();
-		    while(rs.next()) {
-		    	ReplyDTO reply = 
-		    		new ReplyDTO(rs.getInt(1),rs.getString(2), rs.getInt(3), rs.getString(4));
-		    	repliesList.add(reply);
-		    }
-		
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, boardNo); // 
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				//열의 정보를 가져와서 BoardDTO에 담는다.
+				ReplyDTO dto = new ReplyDTO(
+						rs.getInt("reply_no"), rs.getString("reply_writer"),rs.getString("reply_content"),rs.getInt("board_no"), 
+						rs.getString("reply_date"));
+							
+				//BoardDTO를 list에 추가한다.
+				list.add(dto);
+			}
+			
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			throw new SearchWrongException(boardNo+"번 게시판 댓글 조회에 실패했습니다.");
 		}finally {
-			DBManager.releaseConnection(null, ps, rs);
+			DBManager.releaseConnection(con, ps, rs);
 		}
-		return repliesList;
+		
+		return list;
 	}
+	
 
-	@Override
-	public int replyInsert(ReplyDTO replyDTO) throws DMLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	/**
+	 * 댓글 수정
+	 * update reply set content = ? where reply_no = ?
+	 */
 	@Override
 	public int replyUpdate(ReplyDTO replyDTO) throws DMLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql="update reply set content = ? where reply_no = ?";
+		try {
+			con = DBManager.getConnection();
+			ps= con.prepareStatement(sql);
+			//?의 개수만큼 순서대로 setXxx설정 필요.
+			ps.setString(1, replyDTO.getReplyContent());
+			ps.setInt(2, replyDTO.getReplyNo());
+			
+			result = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw new DMLException("댓글을 수정하는데 오류가 발생하여 수정되지 않았습니다.");
+		}finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return result;
 	}
 
+	/**
+	 * 댓글 삭제
+	 */
 	@Override
 	public int replyDelete(int replyNo) throws DMLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql="delete from reply where reply_no = ?";
+		try {
+			con = DBManager.getConnection();
+			ps= con.prepareStatement(sql);
+			//?의 개수만큼 순서대로 setXxx설정 필요.
+			ps.setInt(1, replyNo);
+			result = ps.executeUpdate();
+			
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			throw new DMLException("댓글 삭제에 실패했습니다.");
+		}finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return result;
 	}
 
+	/**
+	 * 댓글 채택하기
+	 */
 	@Override
-	public int replySelect(ReplyDTO replyDTO) throws DMLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int replySelect(QuestionReply quetionReplyDTO) throws DMLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int result=0;
+		String sql="update reply set selected_reply = ? where reply_no = ?";
+		try {
+			con = DBManager.getConnection();
+			ps= con.prepareStatement(sql);
+			//?의 개수만큼 순서대로 setXxx설정 필요.
+			ps.setInt(1, quetionReplyDTO.getSelectedReply());
+			ps.setInt(2, quetionReplyDTO.getReplyNo());
+			
+			result = ps.executeUpdate();
+			
+		}catch (Exception e) {
+			//e.printStackTrace();
+			throw new DMLException("댓글 채택에 실패했습니다.");
+		}finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return result;
 	}
 
 }

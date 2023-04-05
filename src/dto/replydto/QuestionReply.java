@@ -13,8 +13,9 @@ public class QuestionReply extends ReplyDTO{
 		// TODO Auto-generated constructor stub
 	}
 
-	public QuestionReply(int replyNo, String replyWriter, String replyContent, int boardNo, String replyDate) {
+	public QuestionReply(int replyNo, String replyWriter, String replyContent, int boardNo, String replyDate, int selectedReply) {
 		super(replyNo, replyWriter, replyContent, boardNo, replyDate);
+		this.selectedReply=selectedReply;
 		// TODO Auto-generated constructor stub
 	}
 
