@@ -13,11 +13,10 @@ import java.util.List;
 
 import dto.boarddto.BoardDTO;
 import dto.replydto.ReplyDTO;
-import dto.userdto.UserSesseion;
+import dto.userdto.UserSession;
 import exception.DMLException;
 import exception.SearchWrongException;
 import common.DBManager;
-import dao.BoardDAO;
 
 public class BoardDAOImpl implements BoardDAO {
 
@@ -307,7 +306,7 @@ public class BoardDAOImpl implements BoardDAO {
 		try {
 			con = DBManager.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setString(1, UserSesseion.getInstance().getNickName());
+			ps.setString(1, UserSession.getInstance().getNickName());
 			ps.setString(2, replyDTO.getReplyContent());
 			ps.setInt(3, replyDTO.getBoardNo());
 
