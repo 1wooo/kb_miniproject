@@ -2,6 +2,7 @@ package view;
 
 import java.util.Scanner;
 
+import controller.BoardController;
 import dto.boarddto.BoardDTO;
 import dto.userdto.UserSesseion;
 
@@ -17,15 +18,17 @@ public class MainView {
 
 		System.out.println("메인뷰 단 세션 : " + sesseion);
 		while (true) {
+			int selectionIndex = 1;
 			System.out.println("\n----------------------------------------");
-			System.out.print("[ 1. 게시판 조회   ");
-			System.out.print("2. 게시글 작성   ");
-			System.out.print("3. 게시글 검색   ");
-			System.out.print("4. 내 게시글 조회   ");
-			System.out.print("5. 마이페이지   ");
-			System.out.print("6. 로그아웃   ");
-//			System.out.print("7. 오늘의 식단   ");
-			System.out.print("7. 앱 종료 ]");
+			System.out.print("[ " + selectionIndex++ + ". 게시판 조회   ");
+			System.out.print(selectionIndex++ + ". 게시글 작성   ");
+			System.out.print(selectionIndex++ + ". 게시글 검색   ");
+			System.out.print(selectionIndex++ + ". 내 게시글 조회   ");
+			System.out.print(selectionIndex++ + ". 마이페이지   ");
+			System.out.print(selectionIndex++ + ". 로그아웃   ");
+			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
+			if (userSesseion.isAdmin()) System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
+			System.out.print(selectionIndex++ + ". 앱 종료 ]");
 
 			System.out.println("\n--------------------------------------------");
 			System.out.println("원하는 작업을 숫자로 입력해주세요.");
@@ -91,7 +94,7 @@ public class MainView {
 		} catch (NumberFormatException e) {
 			System.out.println("원하는 게시판을 1 ~ 3 사이의 숫자로 입력해주세요.");
 		}
-		// BoardController.selectBoardList(subject);
+		BoardController.boardSelectBySubject(subject);
 	}
 
 	/**
@@ -128,9 +131,9 @@ public class MainView {
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-//		BoardDTO board = new BoardDTO(title, content, "", subject);
-		//
-		// BoardController.insert(board);
+		BoardDTO board = new BoardDTO(title, content, userSesseion.getNickName(), userSesseion.getUuid(), subject);
+		board.setTag(null);
+		BoardController.boardInsert(board);
 	}
 
 	/**
@@ -144,7 +147,9 @@ public class MainView {
 	 * 게시글 검색
 	 */
 	public static void searchBoard() {
-
+		System.out.println("검색하려는 키워드를 입력해주세요.");
+		String keyword = sc.nextLine();
+		BoardController.boardSelectByKeyword(keyword);
 	}
 
 	/**
@@ -167,6 +172,14 @@ public class MainView {
 	public static void checkTodayMeal() {
 
 	}
+	
+	/**
+	 * 어드민 전용 식단 등록
+	 */
+	public static void insertTodayMeal() {
+
+	}
+
 
 	/**
 	 * 로그아웃
