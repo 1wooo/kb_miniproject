@@ -6,16 +6,13 @@ public class UserDTO {
     private String password;
     private String nickname;
     private boolean isAdmin;
-    private boolean isBanned;
-
     public UserDTO(){}
 
-    public UserDTO(int uuid, String userid, String password, String nickname,boolean isBanned, boolean isAdmin) {
+    public UserDTO(int uuid, String userid, String password, String nickname, boolean isAdmin) {
         this.uuid = uuid;
         this.userid = userid;
         this.password = password;
         this.nickname = nickname;
-        this.isBanned = isBanned;
         this.isAdmin = isAdmin;
     }
 
@@ -51,13 +48,6 @@ public class UserDTO {
         this.nickname = nickname;
     }
 
-    public boolean isBanned() {
-        return isBanned;
-    }
-
-    public void setBanned(boolean banned) {
-        isBanned = banned;
-    }
     public boolean isAdmin() {
         return isAdmin;
     }

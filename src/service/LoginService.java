@@ -1,9 +1,10 @@
 package service;
 
 import dto.userdto.UserDTO;
+import dto.userdto.UserSesseion;
 
 public interface LoginService {
-    UserDTO login(String id, String pw);
+    UserSesseion login(String id, String pw);
 
     void signup(String id, String pw, String nickName);
 
