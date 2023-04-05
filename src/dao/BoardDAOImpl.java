@@ -99,7 +99,7 @@ public class BoardDAOImpl implements BoardDAO {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		List<BoardDTO> list = new ArrayList<BoardDTO>(); //리턴값
-		String sql= "select * from boarddto where subject='?'";
+		String sql= "select * from boarddto where subject=?";
 		try {
 			con = DBManager.getConnection();
 			ps = con.prepareStatement(sql);
