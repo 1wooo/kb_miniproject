@@ -21,7 +21,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public static ReplyDAO getInstance() {
 		return instance;
 	}
-	
+
 	/**
 	 * 게시글별 댓글 조회
 	 * select * from board join reply using(board_no)  where board_no=?
@@ -39,14 +39,14 @@ public class ReplyDAOImpl implements ReplyDAO {
 		try {
 		    ps = con.prepareStatement(sql);
 		    ps.setInt(1, boardNo);
-		    
+
 		    rs = ps.executeQuery();
 		    while(rs.next()) {
-		    	ReplyDTO reply = 
+		    	ReplyDTO reply =
 		    		new ReplyDTO(rs.getInt(1),rs.getString(2), rs.getInt(3), rs.getString(4));
 		    	repliesList.add(reply);
 		    }
-		
+
 		}finally {
 			DBManager.releaseConnection(null, ps, rs);
 		}
