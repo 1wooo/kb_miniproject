@@ -85,4 +85,13 @@ public class BoardController {
         }
     }
 
+    public static void replyInsert(ReplyDTO replyDTO) {
+        try {
+            boardService.insertReply(replyDTO);
+            SuccessView.messagePrint("댓글을 작성했습니다.");
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
 }
