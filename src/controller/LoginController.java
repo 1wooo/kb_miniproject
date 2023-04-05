@@ -2,6 +2,7 @@ package controller;
 
 import dao.LoginDAO;
 import dao.LoginDAOImpl;
+import dto.userdto.UserSesseion;
 import exception.LoginWrongException;
 import service.LoginService;
 import service.LoginServiceImpl;
@@ -10,25 +11,21 @@ import view.FailView;
 public class LoginController {
     // 로그인 서비스 싱글톤으로
     private static LoginService loginService = LoginServiceImpl.getInstance();
-    private static LoginDAO loginDAO = LoginDAOImpl.getInstance();
-
-    public static void signIn(String id, String pw) throws Exception {
+    public static UserSesseion signIn(String id, String pw) throws Exception {
+        UserSesseion userSesseion = null;
         try {
-            loginService.login(id, pw);
-        } catch (LoginWrongException e) {
+            userSesseion = loginService.login(id, pw);
+        } catch (RuntimeException e) {
             FailView.errorMessage(e.getMessage());
             throw new Exception();
         }
+        return userSesseion;
     }
 
     public static void signUp(String id, String pw, String nickName) throws Exception {
         try {
             loginService.signup(id, pw, nickName);
-        } catch (Exception e) {
-            /**
-             * 가입시에도 예외처리 필요해보임.
-             * ID, PW에 글자수 제한을 두는경우 or 이미 있는 아이디인 경우
-             */
+        } catch (RuntimeException e) {
             FailView.errorMessage(e.getMessage());
             throw new Exception();
         }

@@ -3,14 +3,19 @@ package view;
 import java.util.Scanner;
 
 import dto.boarddto.BoardDTO;
+import dto.userdto.UserSesseion;
 
 public class MainView {
 	static Scanner sc = new Scanner(System.in);
+	static UserSesseion userSesseion;
 
 	/**
 	 * 메뉴 선택 (동작 선택)
 	 */
-	public static void menuChoice() {
+	public static void menuChoice(UserSesseion sesseion) {
+		userSesseion = sesseion;
+
+		System.out.println("메인뷰 단 세션 : " + sesseion);
 		while (true) {
 			System.out.println("\n----------------------------------------");
 			System.out.print("[ 1. 게시판 조회   ");
