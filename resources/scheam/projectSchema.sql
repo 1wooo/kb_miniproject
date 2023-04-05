@@ -63,12 +63,12 @@ select * from REPLY;
 --drop table USERDTO;
 create table USERDTO(
 	uuid int primary key, --유저 고유번호
-	user_id varchar2(20) not null unique, --로그인 아이디
+	user_id varchar2(20), CONSTRAINT userId_uq UNIQUE (user_id), --로그인 아이디
 	pass_word varchar2(20) not null,--로그인 패스워드
     nick_name varchar2(20) not null,--닉네임
     is_admin CHAR(1), --관리자 여부
     is_banned CHAR(1)
-); 
+);
 --DROP sequence uuid_seq;
 create sequence uuid_seq nocache; 
 --일반 유저
