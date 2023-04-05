@@ -44,8 +44,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> boardSelectByKeyword(String keyWord) throws SearchWrongException {
-		List<BoardDTO> list = boardDAO.boardSelectBySubject(keyWord);
+	public List<BoardDTO> boardSelectByKeyword(String target, String keyWord) throws SearchWrongException {
+		List<BoardDTO> list = boardDAO.boardSelectByKeyword(target, keyWord);
 		if (list.isEmpty())
 			throw new SearchWrongException(keyWord + "단어를 포함한 정보가 없습니다.");
 		return list;
