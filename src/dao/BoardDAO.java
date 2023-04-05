@@ -74,7 +74,15 @@ public interface BoardDAO {
 	 */
 	List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException;
 
+	/**
+	 * 좋아요 누르기
+	 */
 	
+	/**
+	 * 조회하면 자동으로 조회수 증가
+	 */
 	
-	
+	/**
+	 * 질문 해결 시 해결로 변경
+	 */
 }
