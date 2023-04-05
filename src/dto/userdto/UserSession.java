@@ -1,17 +1,22 @@
 package dto.userdto;
 
-public class UserSesseion {
+public class UserSession {
+    private static UserSession instance = new UserSession();
     private int uuid;
     private String nickName;
     private boolean isAdmin;
 
-    public UserSesseion() {
+    private UserSession() {
     }
 
-    public UserSesseion(int uuid, String nickName, boolean isAdmin) {
-        this.uuid = uuid;
-        this.nickName = nickName;
-        this.isAdmin = isAdmin;
+    public static UserSession getInstance() {
+        return instance;
+    }
+
+    public void clear() {
+        this.uuid = 0;
+        this.isAdmin = false;
+        this.nickName = "";
     }
 
     public String getNickName() {

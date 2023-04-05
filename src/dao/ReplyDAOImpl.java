@@ -24,7 +24,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public static ReplyDAO getInstance() {
 		return instance;
 	}
-	
+
 	/**
 	 * 댓글 게시글별검색
 	 * select * from reply where board_no=?;

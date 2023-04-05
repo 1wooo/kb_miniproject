@@ -34,6 +34,15 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardList;
 	}
+	
+	@Override
+	public List<BoardDTO> boardSelectByUserId(int uuid) throws SearchWrongException {
+		List<BoardDTO> boardList = boardDAO.boardSelectByUserId(uuid);
+		if (boardList.size() == 0)
+			throw new SearchWrongException("아직 작성한 게시글이 없습니다...");
+
+		return boardList;
+	}
 
 	@Override
 	public List<BoardDTO> boardSelectBySubject(String subject) throws SearchWrongException {
@@ -44,8 +53,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> boardSelectByKeyword(String keyWord) throws SearchWrongException {
-		List<BoardDTO> list = boardDAO.boardSelectBySubject(keyWord);
+	public List<BoardDTO> boardSelectByKeyword(String target, String keyWord) throws SearchWrongException {
+		List<BoardDTO> list = boardDAO.boardSelectByKeyword(target, keyWord);
 		if (list.isEmpty())
 			throw new SearchWrongException(keyWord + "단어를 포함한 정보가 없습니다.");
 		return list;
@@ -90,6 +99,12 @@ public class BoardServiceImpl implements BoardService {
 		if (result == 0)
 			throw new DMLException("게시글 삭제에 실패했습니다.");
 
+	}
+
+	@Override
+	public void insertReply(ReplyDTO replyDTO) throws DMLException {
+		int res = boardDAO.replyInsert(replyDTO);
+		if (res == 0) throw new DMLException("댓글 작성에 실패했습니다.");
 	}
 
 	@Override
