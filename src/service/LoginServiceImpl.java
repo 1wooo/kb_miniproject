@@ -2,6 +2,7 @@ package service;
 
 import dao.LoginDAO;
 import dao.LoginDAOImpl;
+import dto.userdto.AppUser;
 import dto.userdto.UserDTO;
 import exception.LoginWrongException;
 
@@ -19,6 +20,11 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public UserDTO login(String id, String pw) throws LoginWrongException {
         UserDTO loginUserDTO = loginDAO.loginUser(id, pw);
+
+        if (((AppUser) loginUserDTO).isBanned()) {
+            throw new LoginWrongException("Banned User!!");
+        }
+
         return loginUserDTO;
     }
 

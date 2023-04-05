@@ -123,7 +123,8 @@ public class MainView {
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-		BoardDTO board = new BoardDTO(title, content, "", subject);
+//		BoardDTO board = new BoardDTO(title, content, "", subject);
+		//
 		// BoardController.insert(board);
 	}
 

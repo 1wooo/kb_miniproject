@@ -49,7 +49,7 @@ public class LoginView {
 			System.out.println("비밀번호를 입력해주세요.");
 			String pw = sc.nextLine();
 
-//			LoginController.signIn(id, pw);
+			LoginController.signIn(id, pw);
 		
 		} catch (Exception e) {
 			System.out.println("다시 시도하시겠습니까? yes / no");

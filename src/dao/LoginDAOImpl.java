@@ -1,6 +1,7 @@
 package dao;
 
 import common.DBManager;
+import dto.userdto.AppUser;
 import dto.userdto.UserDTO;
 import exception.LoginWrongException;
 
@@ -40,8 +41,8 @@ public class LoginDAOImpl implements LoginDAO {
                 boolean is_admin = Objects.equals(rs.getString(5), "Y");
                 boolean is_banned = Objects.equals(rs.getString(6), "Y");
 //                int read_notice_cnt = rs.getInt(7);
-
-                userDTO = new UserDTO(uuid, user_id, password, nickname, is_admin, is_banned);
+                userDTO = new AppUser(uuid, user_id, password, nickname, is_admin, is_banned, 0);
+                System.out.println(((AppUser) userDTO).isBanned());
             }
 
         } catch (SQLException e) {

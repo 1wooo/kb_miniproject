@@ -21,7 +21,7 @@ public class LoginController {
         }
     }
 
-    public static void signUp(String id, String pw, String nickName) {
+    public static void signUp(String id, String pw, String nickName) throws Exception {
         try {
             loginService.signup(id, pw, nickName);
         } catch (Exception e) {
@@ -30,11 +30,11 @@ public class LoginController {
              * ID, PW에 글자수 제한을 두는경우 or 이미 있는 아이디인 경우
              */
             FailView.errorMessage(e.getMessage());
+            throw new Exception();
         }
     }
 
     public static void updatePassWord(String passWord) {
-
         try {
             loginService.updatePassWord(passWord);
         } catch (Exception e) {
