@@ -10,7 +10,6 @@ import java.util.List;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
-import kb.mvc.common.DBManager;
 
 public class ReplyDAOImpl implements ReplyDAO {
 
