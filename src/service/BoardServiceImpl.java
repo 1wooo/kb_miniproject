@@ -8,22 +8,36 @@ import exception.DMLException;
 import exception.SearchWrongException;
 
 public class BoardServiceImpl implements BoardService {
-
+	// singleton
+	private static BoardService instance = new BoardServiceImpl();
+//	pritate static BoardDAO boardDAO = BoardDAOImpl.getInstance();
+	
+	private BoardServiceImpl() {}
+	public static BoardService getInstance() {
+		return instance;
+	}
+	
 	@Override
 	public List<BoardDTO> boardSelectAll() throws SearchWrongException {
-		// TODO Auto-generated method stub
+		// List<BoardDTO> boardList = boardDAO.boardSelectAll();
+		// if (boardList.size() == 0) throw new SearchWrongException("아직 게시글이 없습니다...");
+		// return boardList;
 		return null;
 	}
 
 	@Override
 	public List<BoardDTO> boardSelectBySubject(String subject) throws SearchWrongException {
-		// TODO Auto-generated method stub
+		// List<BoardDTO> boardList = boardDAO.boardSelectBySubject();
+		// if (boardList.size() == 0) throw new SearchWrongException("아직 게시글이 없습니다...");
+		// return boardList;
 		return null;
 	}
 
 	@Override
 	public List<BoardDTO> boardSelectByKeyword(String keyWord) throws SearchWrongException {
-		// TODO Auto-generated method stub
+		// List<BoardDTO> boardList = boardDAO.boardSelectByKeyword();
+		// if (boardList.size() == 0) throw new SearchWrongException("검색어에 해당하는 게시글이 없습니다...");
+		// return boardList;
 		return null;
 	}
 
