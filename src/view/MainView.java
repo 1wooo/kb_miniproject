@@ -224,6 +224,6 @@ public class MainView {
 	 * 로그아웃
 	 */
 	public static void logOut() {
-
+		UserSession.getInstance().clear();
 	}
 }
