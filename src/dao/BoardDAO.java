@@ -20,7 +20,7 @@ public interface BoardDAO {
 	/**
 	 * 레코드 유저 아이디별 검색 select * from boarddto where userId=?;
 	 */
-	BoardDTO boardSelectByUserId(int userId) throws SearchWrongException;
+	List<BoardDTO> boardSelectByUserId(int userId) throws SearchWrongException;
 
 	/**
 	 * 레코드 게시판별 검색 select * from boarddto where subject='?';
