@@ -1,21 +1,21 @@
---À¯Àú »ı¼º
+--ìœ ì € ìƒì„±
 create user c##team identified by team;
 grant connect, resource, dba to c##team;
 conn c##team/team;
 
 --drop table BOARDDTO;
 create table BOARDDTO(
-	board_no int primary key, --±Û¹øÈ£
-	title varchar2(30) not null, --Á¦¸ñ
-	content varchar2(100) not null,--³»¿ë
-    writer varchar2(20) not null,--ÀÛ¼ºÀÚ
-    uuid int references USERDTO(uuid),--À¯Àú ¾ÆÀÌµğ
+	board_no int primary key, --ê¸€ë²ˆí˜¸
+	title varchar2(30) not null, --ì œëª©
+	content varchar2(100) not null,--ë‚´ìš©
+    writer varchar2(20) not null,--ì‘ì„±ì
+    uuid int references USERDTO(uuid),--ìœ ì € ì•„ì´ë””
     subject varchar2(10),
-    tag varchar2(10),--°Ô½ÃÆÇ ºĞ·ù
-    like_cnt int,--ÁÁ¾Æ¿ä ¼ö
-    view_cnt int,--Á¶È¸¼ö
-	board_date date not null,--µî·ÏÀÏ
-    is_solved char(1), --Áú¹®°Ô½ÃÆÇ ÇØ°á ¿©ºÎ
+    tag varchar2(10),--ê²Œì‹œíŒ ë¶„ë¥˜
+    like_cnt int,--ì¢‹ì•„ìš” ìˆ˜
+    view_cnt int,--ì¡°íšŒìˆ˜
+	board_date date not null,--ë“±ë¡ì¼
+    is_solved char(1), --ì§ˆë¬¸ê²Œì‹œíŒ í•´ê²° ì—¬ë¶€
     selected_reply int unique
 ); 
 
@@ -23,63 +23,62 @@ ALTER TABLE BOARDDTO ADD foreign KEY(selected_reply) references REPLY (selected_
 
 --DROP sequence board_seq;
 create sequence board_seq nocache; 
---°øÁö notice 
-insert into BOARDDTO values (board_seq.nextval, '¼ö¾÷½ÃÀÛ½Ã°£','¼ö¾÷Àº 9½Ã¿¡ ½ÃÀÛµË´Ï´Ù. Áö°¢ÇÏÁö ¸¶¼¼¿ä', 'ÈñÁ¤»ù', 11, 'notice','#Áß¿ä', 2, 2, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '½ÃÇè°øÁö','´ÙÀ½ÁÖ ½ÃÇèÀÌ ÀÖ½À´Ï´Ù. ³»¿ëÀº ¿ÀÇÂºÏÀÔ´Ï´Ù.', 'ÈñÁ¤»ù', 11, 'notice','#±ä±Ş', 0, 6, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, 'ÈŞ°­°øÁö','4¿ù 21ÀÏ ÈŞ°­ ¿¹Á¤ÀÔ´Ï´Ù.', 'ÀÌÇÁ·Î', 6, 'notice','#ÈŞ°­', 12, 6, sysdate,null,null);
+--ê³µì§€ notice 
+insert into BOARDDTO values (board_seq.nextval, 'ìˆ˜ì—…ì‹œì‘ì‹œê°„','ìˆ˜ì—…ì€ 9ì‹œì— ì‹œì‘ë©ë‹ˆë‹¤. ì§€ê°í•˜ì§€ ë§ˆì„¸ìš”', 'í¬ì •ìƒ˜', 11, 'notice','#ì¤‘ìš”', 2, 2, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, 'ì‹œí—˜ê³µì§€','ë‹¤ìŒì£¼ ì‹œí—˜ì´ ìˆìŠµë‹ˆë‹¤. ë‚´ìš©ì€ ì˜¤í”ˆë¶ì…ë‹ˆë‹¤.', 'í¬ì •ìƒ˜', 11, 'notice','#ê¸´ê¸‰', 0, 6, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, 'íœ´ê°•ê³µì§€','4ì›” 21ì¼ íœ´ê°• ì˜ˆì •ì…ë‹ˆë‹¤.', 'ì´í”„ë¡œ', 6, 'notice','#íœ´ê°•', 12, 6, sysdate,null,null);
 
---ÀÚÀ¯ free
-insert into BOARDDTO values (board_seq.nextval, '½Å³­´Ù','ÆÀÇÁ·ÎÁ§Æ®ÇÏ±â ½Å³²', 'Áö¼ö', 8, 'free','#½Å³²', 0, 1, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '³¯¾¾','³¯¾¾ ³Ê¹« ÁÁ´Ù. ³ª°¡¼­ ³î°í ½Í´Ù', 'ÀçÇö', 7, 'free','#º¢²É', 1, 1, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, 'Ãà±¸','ÇÏ°í ½Í´Ù', 'ÁÖÈ£', 9, 'free','#Ãà±¸', 3, 3, sysdate,null,null);
+--ììœ  free
+insert into BOARDDTO values (board_seq.nextval, 'ì‹ ë‚œë‹¤','íŒ€í”„ë¡œì íŠ¸í•˜ê¸° ì‹ ë‚¨', 'ì§€ìˆ˜', 8, 'free','#ì‹ ë‚¨', 0, 1, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, 'ë‚ ì”¨','ë‚ ì”¨ ë„ˆë¬´ ì¢‹ë‹¤. ë‚˜ê°€ì„œ ë†€ê³  ì‹¶ë‹¤', 'ì¬í˜„', 7, 'free','#ë²šê½ƒ', 1, 1, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, 'ì¶•êµ¬','í•˜ê³  ì‹¶ë‹¤', 'ì£¼í˜¸', 9, 'free','#ì¶•êµ¬', 3, 3, sysdate,null,null);
 
---Áú¹® question
-insert into BOARDDTO values (board_seq.nextval, 'Áú¹®ÀÖ½À´Ï´Ù.','ÀÚ¹Ù ³Ê¹« ¾î·Á¿ö¿ä', 'Áö¼ö', 8, 'question','#ÀÚ¹Ù', 1, 1, sysdate,'N',null);
-insert into BOARDDTO values (board_seq.nextval, 'Áú¹®','Áö°¢ÇÏ¸é ¾î¶»°Ô µÇ³ª¿ä?', 'Áö¼ö', 8, 'question','#Áú¹®', 0, 1, sysdate,'N',null);
+--ì§ˆë¬¸ question
+insert into BOARDDTO values (board_seq.nextval, 'ì§ˆë¬¸ìˆìŠµë‹ˆë‹¤.','ìë°” ë„ˆë¬´ ì–´ë ¤ì›Œìš”', 'ì§€ìˆ˜', 8, 'question','#ìë°”', 1, 1, sysdate,'N',null);
+insert into BOARDDTO values (board_seq.nextval, 'ì§ˆë¬¸','ì§€ê°í•˜ë©´ ì–´ë–»ê²Œ ë˜ë‚˜ìš”?', 'ì§€ìˆ˜', 8, 'question','#ì§ˆë¬¸', 0, 1, sysdate,'N',null);
 
 select * from BOARDDTO;
 
 --DROP TABLE REPLY;
 create table REPLY(
-  reply_no int primary key, --´ñ±Û¹øÈ£
-  reply_writer varchar2(20) not null, --´ñ±ÛÀÛ¼ºÀÚ
-  reply_content varchar2(100) not null, --´ñ±Û³»¿ë
-  board_no int references BOARDDTO(board_no), --´ñ±ÛÀ» ´Ş ºÎ¸ğ±Û¹øÈ£
-  reply_date date, --µî·ÏÀÏ
+  reply_no int primary key, --ëŒ“ê¸€ë²ˆí˜¸
+  reply_writer varchar2(20) not null, --ëŒ“ê¸€ì‘ì„±ì
+  reply_content varchar2(100) not null, --ëŒ“ê¸€ë‚´ìš©
+  board_no int references BOARDDTO(board_no), --ëŒ“ê¸€ì„ ë‹¬ ë¶€ëª¨ê¸€ë²ˆí˜¸
+  reply_date date, --ë“±ë¡ì¼
   selected_reply int unique
 );
 
 --drop sequence reply_seq;
 create sequence reply_seq nocache; 
 
-insert into REPLY values (reply_seq.nextval, 'ÀçÇö','±×·¯°Ô', 21, sysdate,null);
-insert into REPLY values (reply_seq.nextval, '¿ø¿ì','³ªµÎ', 21, sysdate,null);
-insert into REPLY values (reply_seq.nextval, 'Áö¼ö','³ª°¡ÀÚ!', 21, sysdate,null);
---Áú¹®°Ô½ÃÆÇ
-insert into REPLY values (reply_seq.nextval, 'ÀÌÇÁ·Î','3¹ø Áö°¢ÇÏ¸é 1¹ø °á¼®ÀÌ µË´Ï´Ù.', 23, sysdate,null);
+insert into REPLY values (reply_seq.nextval, 'ì¬í˜„','ê·¸ëŸ¬ê²Œ', 21, sysdate,null);
+insert into REPLY values (reply_seq.nextval, 'ì›ìš°','ë‚˜ë‘', 21, sysdate,null);
+insert into REPLY values (reply_seq.nextval, 'ì§€ìˆ˜','ë‚˜ê°€ì!', 21, sysdate,null);
+--ì§ˆë¬¸ê²Œì‹œíŒ
+insert into REPLY values (reply_seq.nextval, 'ì´í”„ë¡œ','3ë²ˆ ì§€ê°í•˜ë©´ 1ë²ˆ ê²°ì„ì´ ë©ë‹ˆë‹¤.', 23, sysdate,null);
 
 select * from REPLY;
 
 --drop table USERDTO;
 create table USERDTO(
-	uuid int primary key, --À¯Àú °íÀ¯¹øÈ£
-	userid varchar2(20) not null unique, --·Î±×ÀÎ ¾ÆÀÌµğ
-	password varchar2(20) not null,--·Î±×ÀÎ ÆĞ½º¿öµå
-    nickname varchar2(20) not null,--´Ğ³×ÀÓ
-    is_admin CHAR(1), --°ü¸®ÀÚ ¿©ºÎ
-    is_banned CHAR(1),
-    read_notice_cnt int
+	uuid int primary key, --ìœ ì € ê³ ìœ ë²ˆí˜¸
+	userid varchar2(20) not null unique, --ë¡œê·¸ì¸ ì•„ì´ë””
+	password varchar2(20) not null,--ë¡œê·¸ì¸ íŒ¨ìŠ¤ì›Œë“œ
+    nickname varchar2(20) not null,--ë‹‰ë„¤ì„
+    is_admin CHAR(1), --ê´€ë¦¬ì ì—¬ë¶€
+    is_banned CHAR(1)
 ); 
 --DROP sequence uuid_seq;
 create sequence uuid_seq nocache; 
---ÀÏ¹İ À¯Àú
-insert into USERDTO values (uuid_seq.nextval, 'abcd','!1234','ÀçÇö', 'N', 'N', 1);
-insert into USERDTO values (uuid_seq.nextval, 'hi','abde1','Áö¼ö', 'N', 'Y', 3);
-insert into USERDTO values (uuid_seq.nextval, 'ho','764pass','ÁÖÈ£', 'N', 'N', 5);
-insert into USERDTO values (uuid_seq.nextval, 'system','pass123','¿ø¿ì','N', 'N', 6);
+--ì¼ë°˜ ìœ ì €
+insert into USERDTO values (uuid_seq.nextval, 'abcd','!1234','ì¬í˜„', 'N', 'N');
+insert into USERDTO values (uuid_seq.nextval, 'hi','abde1','ì§€ìˆ˜', 'N', 'Y');
+insert into USERDTO values (uuid_seq.nextval, 'ho','764pass','ì£¼í˜¸', 'N', 'N');
+insert into USERDTO values (uuid_seq.nextval, 'system','pass123','ì›ìš°','N', 'N');
 
---°ü¸®ÀÚ 
-insert into USERDTO values (uuid_seq.nextval, 'ssam','scott','ÈñÁ¤»ù', 'Y', null, null);
-insert into USERDTO values (uuid_seq.nextval, 'pro','tiger','ÀÌÇÁ·Î', 'Y', null, null);
+--ê´€ë¦¬ì 
+insert into USERDTO values (uuid_seq.nextval, 'ssam','scott','í¬ì •ìƒ˜', 'Y', null, null);
+insert into USERDTO values (uuid_seq.nextval, 'pro','tiger','ì´í”„ë¡œ', 'Y', null, null);
 
 select * from USERDTO;
