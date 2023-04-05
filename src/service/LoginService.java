@@ -1,9 +1,11 @@
 package service;
 
-public interface LoginService {
-    boolean login(String id, String pw);
+import dto.userdto.UserDTO;
 
-    boolean signup(String id, String pw, String nickName);
+public interface LoginService {
+    UserDTO login(String id, String pw);
+
+    void signup(String id, String pw, String nickName);
 
     void updatePassWord(String passWord);
 

@@ -1,7 +1,13 @@
 package service;
 
+import dao.LoginDAO;
+import dao.LoginDAOImpl;
+import dto.userdto.UserDTO;
+import exception.LoginWrongException;
+
 public class LoginServiceImpl implements LoginService {
-    private static LoginServiceImpl instance = new LoginServiceImpl();
+    private static LoginService instance = new LoginServiceImpl();
+    private static LoginDAO loginDAO = LoginDAOImpl.getInstance();
 
     // DAO 싱글톤으로 받아와야함.
 
@@ -11,13 +17,14 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public boolean login(String id, String pw) {
-        return false;
+    public UserDTO login(String id, String pw) throws LoginWrongException {
+        UserDTO loginUserDTO = loginDAO.loginUser(id, pw);
+        return loginUserDTO;
     }
 
     @Override
-    public boolean signup(String id, String pw, String nickName) {
-        return false;
+    public void signup(String id, String pw, String nickName) {
+
     }
 
     @Override
