@@ -12,7 +12,7 @@ public interface BoardService {
 	 * 모든 게시글 레코드 검색
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
-	
+
 	/**
 	 * 특정 게시판의 게시글 레코드 검색
 	 */
@@ -21,13 +21,13 @@ public interface BoardService {
 	/**
 	 * 제목 + 내용에 특정 문자열을 포함한 게시글 레코드 검색
 	 */
-	List<BoardDTO> boardSelectByKeyword(String keyWord) throws SearchWrongException;
-	
+	List<BoardDTO> boardSelectByKeyword(String target, String keyWord) throws SearchWrongException;
+
 	/**
 	 * 좋아요 순으로 게시글 레코드 검색
 	 */
 	List<BoardDTO> boardSelectByLike() throws SearchWrongException;
-	
+
 	/**
 	 * 조회수 순으로 게시글 레코드 검색
 	 */
