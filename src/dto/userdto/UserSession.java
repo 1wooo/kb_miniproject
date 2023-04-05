@@ -1,15 +1,15 @@
 package dto.userdto;
 
-public class UserSesseion {
-    private static UserSesseion instance = new UserSesseion();
+public class UserSession {
+    private static UserSession instance = new UserSession();
     private int uuid;
     private String nickName;
     private boolean isAdmin;
 
-    private UserSesseion() {
+    private UserSession() {
     }
 
-    public static UserSesseion getInstance() {
+    public static UserSession getInstance() {
         return instance;
     }
 

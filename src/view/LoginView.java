@@ -3,13 +3,13 @@ package view;
 import java.util.Scanner;
 
 import controller.LoginController;
-import dto.userdto.UserSesseion;
+import dto.userdto.UserSession;
 
 public class LoginView {
 	static Scanner sc = new Scanner(System.in);
-	static UserSesseion userSesseion;
+	static UserSession userSession;
 
-	public static UserSesseion loginChoice() {
+	public static UserSession loginChoice() {
 		while (true) {
 			System.out.println("\n----------------------------------------");
 			System.out.print("[ 1. 로그인   ");
@@ -23,7 +23,7 @@ public class LoginView {
 				switch (menu) {
 				case 1:
 					signIn();
-					return userSesseion;
+					return userSession;
 				case 2:
 					signUp();
 					break;
@@ -51,7 +51,7 @@ public class LoginView {
 			System.out.println("비밀번호를 입력해주세요.");
 			String pw = sc.nextLine();
 
-			userSesseion = LoginController.signIn(id, pw);
+			userSession = LoginController.signIn(id, pw);
 
 		} catch (Exception e) {
 			System.out.println("다시 시도하시겠습니까? yes / no");

@@ -4,7 +4,7 @@ import dao.LoginDAO;
 import dao.LoginDAOImpl;
 import dto.userdto.AppUser;
 import dto.userdto.UserDTO;
-import dto.userdto.UserSesseion;
+import dto.userdto.UserSession;
 import exception.DMLException;
 import exception.LoginWrongException;
 
@@ -27,7 +27,7 @@ public class LoginServiceImpl implements LoginService {
         if (((AppUser) loginUserDTO).isBanned()) {
             throw new LoginWrongException("Banned User!!");
         }
-        UserSesseion sesseion1 = UserSesseion.getInstance();
+        UserSession sesseion1 = UserSession.getInstance();
         sesseion1.setUuid(loginUserDTO.getUuid());
         sesseion1.setNickName(loginUserDTO.getNickname());
         sesseion1.setAdmin(loginUserDTO.isAdmin());

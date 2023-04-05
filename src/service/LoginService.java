@@ -1,8 +1,5 @@
 package service;
 
-import dto.userdto.UserDTO;
-import dto.userdto.UserSesseion;
-
 public interface LoginService {
     void login(String id, String pw);
 
