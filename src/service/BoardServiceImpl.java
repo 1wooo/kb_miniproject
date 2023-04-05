@@ -34,6 +34,15 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardList;
 	}
+	
+	@Override
+	public List<BoardDTO> boardSelectByUserId(int uuid) throws SearchWrongException {
+		List<BoardDTO> boardList = boardDAO.boardSelectByUserId(uuid);
+		if (boardList.size() == 0)
+			throw new SearchWrongException("아직 작성한 게시글이 없습니다...");
+
+		return boardList;
+	}
 
 	@Override
 	public List<BoardDTO> boardSelectBySubject(String subject) throws SearchWrongException {
