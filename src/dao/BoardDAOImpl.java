@@ -13,6 +13,7 @@ import java.util.List;
 
 import dto.boarddto.BoardDTO;
 import dto.replydto.ReplyDTO;
+import dto.userdto.UserSesseion;
 import exception.DMLException;
 import exception.SearchWrongException;
 import common.DBManager;
@@ -295,8 +296,26 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int replyInsert(ReplyDTO replyDTO) throws DMLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "insert into REPLY values (reply_seq.nextval, ?, ?, ?, sysdate,null);";
+		int res = 0;
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, UserSesseion.getInstance().getNickName());
+			ps.setString(2, replyDTO.getReplyContent());
+			ps.setInt(3, replyDTO.getBoardNo());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+//			e.printStackTrace();
+			throw new DMLException("댓글 작성에 실패했습니다.");
+		} finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return res;
 	}
 
 	@Override
