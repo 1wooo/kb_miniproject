@@ -109,6 +109,8 @@ public class MainView {
 			System.out.println("원하는 게시판을 1 ~ 3 사이의 숫자로 입력해주세요.");
 		}
 		BoardController.boardSelectBySubject(subject);
+
+
 	}
 
 	/**

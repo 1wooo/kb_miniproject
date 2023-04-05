@@ -81,7 +81,7 @@ public class LoginView {
 
 			LoginController.signUp(id, pw, nickName);
 			// test code
-			throw new Exception();
+//			throw new Exception();
 		} catch (Exception e) {
 			System.out.println("다시 시도하시겠습니까? yes / no");
 			String choice = sc.nextLine();

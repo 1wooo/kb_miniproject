@@ -74,11 +74,12 @@ public class BoardDAOImpl implements BoardDAO {
 			ps.setInt(1, userId);
 
 			rs = ps.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				// 열의 정보를 가져와서 BoardDTO에 담는다.
 				boardDTO = new BoardDTO(rs.getInt("board_no"), rs.getString("title"), rs.getString("content"),
 						rs.getString("writer"), rs.getInt("uuid"), rs.getString("subject"), rs.getString("tag"),
 						rs.getInt("like_cnt"), rs.getInt("view_cnt"), rs.getString("board_date"));
+				list.add(boardDTO);
 			}
 
 		} catch (SQLException e) {
