@@ -38,12 +38,12 @@ public class LoginDAOImpl implements LoginDAO {
             if (rs.next()) {
                 int uuid = rs.getInt(1);
                 String user_id = rs.getString(2);
-                String pass_word = rs.getString(3);
-                String nick_name = rs.getString(4);
+                String password = rs.getString(3);
+                String nickname = rs.getString(4);
                 boolean is_admin = Objects.equals(rs.getString(5), "Y");
                 boolean is_banned = Objects.equals(rs.getString(6), "Y");
 //                int read_notice_cnt = rs.getInt(7);
-                userDTO = new AppUser(uuid, user_id, pass_word, nick_name, is_admin, is_banned);
+                userDTO = new AppUser(uuid, user_id, password, nickname, is_admin, is_banned);
             } else {
                 throw new LoginWrongException("아이디 혹은 패스워드가 잘못되었습니다.");
             }
