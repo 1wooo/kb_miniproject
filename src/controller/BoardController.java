@@ -22,6 +22,15 @@ public class BoardController {
             FailView.errorMessage(e.getMessage());
         }
     }
+     
+    public static void boardSelectByUserId(int uuid) {
+    	try {
+    		List<BoardDTO> boardList = boardService.boardSelectByUserId(uuid);
+        	SuccessView.boardListPrint(boardList, 1);
+        } catch (SearchWrongException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
     
     public static void boardSelectBySubject(String subject) {
         try {
