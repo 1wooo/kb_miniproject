@@ -61,11 +61,12 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public BoardDTO boardSelectByUserId(int userId) throws SearchWrongException {
+		public List<BoardDTO> boardSelectByUserId(int userId) throws SearchWrongException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		BoardDTO boardDTO = null;
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		String sql = "select * from boarddto where uuid = ? ";
 		try {
 			con = DBManager.getConnection();
@@ -87,7 +88,7 @@ public class BoardDAOImpl implements BoardDAO {
 			DBManager.releaseConnection(con, ps, rs);
 		}
 
-		return boardDTO;
+		return list;
 	}
 
 	/**
