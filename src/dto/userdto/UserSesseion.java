@@ -1,25 +1,40 @@
 package dto.userdto;
 
 public class UserSesseion {
-    private static int uuid;
-    private static String userId;
+    private int uuid;
+    private String nickName;
+    private boolean isAdmin;
 
     public UserSesseion() {
     }
 
-    public static int getUuid() {
+    public UserSesseion(int uuid, String nickName, boolean isAdmin) {
+        this.uuid = uuid;
+        this.nickName = nickName;
+        this.isAdmin = isAdmin;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public int getUuid() {
         return uuid;
     }
 
-    public static void setUuid(int uuid) {
-        UserSesseion.uuid = uuid;
+    public void setUuid(int uuid) {
+        this.uuid = uuid;
     }
 
-    public static String getUserId() {
-        return userId;
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public static void setUserId(String userId) {
-        UserSesseion.userId = userId;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

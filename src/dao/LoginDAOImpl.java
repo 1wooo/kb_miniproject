@@ -1,8 +1,11 @@
 package dao;
 
 import common.DBManager;
+import dto.userdto.AppUser;
 import dto.userdto.UserDTO;
 import exception.LoginWrongException;
+import exception.SignupWrongException;
+import oracle.jdbc.driver.DBConversion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,8 +43,9 @@ public class LoginDAOImpl implements LoginDAO {
                 boolean is_admin = Objects.equals(rs.getString(5), "Y");
                 boolean is_banned = Objects.equals(rs.getString(6), "Y");
 //                int read_notice_cnt = rs.getInt(7);
-
-                userDTO = new UserDTO(uuid, user_id, password, nickname, is_admin, is_banned);
+                userDTO = new AppUser(uuid, user_id, password, nickname, is_admin, is_banned);
+            } else {
+                throw new LoginWrongException("아이디 혹은 패스워드가 잘못되었습니다.");
             }
 
         } catch (SQLException e) {
@@ -51,5 +55,31 @@ public class LoginDAOImpl implements LoginDAO {
             DBManager.releaseConnection(con, st, rs);
         }
         return userDTO;
+    }
+
+    @Override
+    public int signUp(String id, String pw, String nickName) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String sql = "insert into USERDTO values (uuid_seq.nextval, ?, ?, ?, ?, ?)";
+        int res = 0;
+
+        try {
+            con = DBManager.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ps.setString(2, pw);
+            ps.setString(3, nickName);
+            ps.setString(4, "N");
+            ps.setString(5, "N");
+
+            res = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SignupWrongException("아이디를 다시 설정해주시기 바랍니다.");
+        }finally {
+            DBManager.releaseConnection(con, ps);
+        }
+        return res;
     }
 }
