@@ -1,8 +1,8 @@
 package exception;
 
 /**
+ * 작성자 : 서지수
  * 검색 오류 발생 시의 예외처리
- * @author Seojisoo
  *
  */
 public class SearchWrongException extends RuntimeException{
