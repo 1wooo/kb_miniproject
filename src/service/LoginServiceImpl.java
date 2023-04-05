@@ -20,17 +20,17 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public UserSesseion login(String id, String pw) throws LoginWrongException {
+    public void login(String id, String pw) throws LoginWrongException {
 
         UserDTO loginUserDTO = loginDAO.loginUser(id, pw);
 
         if (((AppUser) loginUserDTO).isBanned()) {
             throw new LoginWrongException("Banned User!!");
         }
-        UserSesseion sesseion1 = new UserSesseion(loginUserDTO.getUuid(), loginUserDTO.getNickname(), loginUserDTO.isAdmin());
-
-        System.out.println("서비스단 세션 : " + sesseion1);
-        return sesseion1;
+        UserSesseion sesseion1 = UserSesseion.getInstance();
+        sesseion1.setUuid(loginUserDTO.getUuid());
+        sesseion1.setNickName(loginUserDTO.getNickname());
+        sesseion1.setAdmin(loginUserDTO.isAdmin());
     }
 
     @Override

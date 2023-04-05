@@ -48,6 +48,8 @@ public interface BoardService {
 	 */
 	void boardDelete(int boardNo) throws DMLException;
 
+	void insertReply(ReplyDTO replyDTO) throws DMLException;
+
 	/**
 	 * 부모글에 해당하는 댓글 리스트 가져오기
 	 */

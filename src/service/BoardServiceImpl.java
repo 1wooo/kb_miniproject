@@ -93,6 +93,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public void insertReply(ReplyDTO replyDTO) throws DMLException {
+		int res = boardDAO.replyInsert(replyDTO);
+		if (res == 0) throw new DMLException("댓글 작성에 실패했습니다.");
+	}
+
+	@Override
 	public List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException {
 		// TODO Auto-generated method stub
 		return null;
