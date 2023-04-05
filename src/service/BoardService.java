@@ -12,6 +12,11 @@ public interface BoardService {
 	 * 모든 게시글 레코드 검색
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
+	
+	/** 
+	 * 특정 uuid인 유저의 게시글 레코드 검색
+	 * */
+	List<BoardDTO> boardSelectByUserId(int uuid) throws SearchWrongException;
 
 	/**
 	 * 특정 게시판의 게시글 레코드 검색
