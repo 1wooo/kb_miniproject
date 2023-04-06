@@ -25,27 +25,27 @@ public class UserDTO {
     }
 
     public String getUserid() {
-        return userid;
+        return user_id;
     }
 
     public void setUserid(String userid) {
-        this.userid = userid;
+        this.user_id = userid;
     }
 
     public String getPassword() {
-        return password;
+        return pass_word;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.pass_word = password;
     }
 
     public String getNickname() {
-        return nickname;
+        return nick_name;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nick_name = nickname;
     }
 
     public boolean isAdmin() {
@@ -60,9 +60,9 @@ public class UserDTO {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("uuid=").append(uuid);
-        sb.append(", userid='").append(userid).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", nickname='").append(nickname).append('\'');
+        sb.append(", userid='").append(user_id).append('\'');
+        sb.append(", password='").append(pass_word).append('\'');
+        sb.append(", nickname='").append(nick_name).append('\'');
         sb.append(", isAdmin=").append(isAdmin);
         return sb.toString();
     }
