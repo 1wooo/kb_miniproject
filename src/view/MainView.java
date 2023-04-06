@@ -24,9 +24,9 @@ public class MainView {
 			System.out.print("[ " + selectionIndex++ + ". 게시판 조회   ");
 			System.out.print(selectionIndex++ + ". 게시글 작성   ");
 			System.out.print(selectionIndex++ + ". 게시글 검색   ");
-			System.out.print(selectionIndex++ + ". 내 게시글 조회/수정/삭제   ");
-			System.out.print(selectionIndex++ + ". 마이페이지   ");
-			System.out.print(selectionIndex++ + ". 로그아웃   ");
+			System.out.print(selectionIndex++ + ". 내 게시글 조회   ");
+			System.out.print(selectionIndex++ + ". 마이페이지   \n");
+			System.out.print("  " + selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
 			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
 			if (UserSession.getInstance().isAdmin())
