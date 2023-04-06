@@ -29,6 +29,7 @@ public class ReplyController {
 
 		} catch (SearchWrongException e) {
 			// e.printStackTrace();
+
 			FailView.errorMessage(e.getMessage());
 		}
 	}

@@ -87,6 +87,28 @@ public interface BoardDAO {
 	int updateViewCnt(int boardNo) throws DMLException;
 
 	/**
+	 * 내가 받은 좋아요 수 가져오기
+	 * @return 좋아요 수
+	 * @throws DMLException
+	 */
+	int selectMyLikeCnt(int uuid) throws DMLException;
+
+	/**
+	 * 내가 쓴 글 개수
+	 */
+	int selectMyContentCnt(int uuid) throws DMLException;
+
+	/**
+	 * 내가 쓴 댓글 개수
+	 */
+	int selectMyReplyCnt(int uuid) throws DMLException;
+
+	/**
+	 * 식사 업데이트
+	 */
+	int insertTodayMeal(MealDTO mealDTO) throws DMLException;
+
+	/**
 	 * 식사 가져오기
 	 */
 	MealDTO selectTodayMeal() throws DMLException;

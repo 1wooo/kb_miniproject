@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.BoardController;
+import controller.ReplyController;
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.userdto.UserSession;
 import dto.replydto.ReplyDTO;
 
@@ -92,10 +94,10 @@ public class SuccessView {
 			case 1:
 				return;
 			case 2:
-				// TODO: 댓글 뷰 호출해서 조회
+				ReplyController.replySelectByBoardNo(board.getBoardNo());
 				break;
 			case 3:
-				BoardController.updateLikeCnt(board.getBoardNo());
+				System.out.println("내 글은 좋아요를 누를 수 없습니다!!");
 				break;
 			case 4:
 				if (!isMyBoard && !isAdmin) {
@@ -121,6 +123,7 @@ public class SuccessView {
 		System.out.println(message);
 	}
 
+
 	/**
 	 * @author 서지수
 	 * @param 댓글 조회, 생성, 수정, 삭제 성공 뷰
@@ -130,6 +133,16 @@ public class SuccessView {
 		for (ReplyDTO reply : replyList) {
 			System.out.println(" ⁕⁕⁕ " + reply);
 		}
+	}
+
+	/** 
+	 * 오늘의 메뉴 출력
+	 * */
+	public static void mealPrint(MealDTO mealDTO) {
+		final StringBuilder sb = new StringBuilder(); 
+		sb.append(mealDTO.getDate()).append(" 오늘의 메뉴\n");
+		sb.append(mealDTO.getMeal());
+		System.out.println(sb.toString());
 	}
 
 }

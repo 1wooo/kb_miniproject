@@ -24,9 +24,9 @@ public class MainView {
 			System.out.print("[ " + selectionIndex++ + ". 게시판 조회   ");
 			System.out.print(selectionIndex++ + ". 게시글 작성   ");
 			System.out.print(selectionIndex++ + ". 게시글 검색   ");
-			System.out.print(selectionIndex++ + ". 내 게시글 조회/수정/삭제   ");
-			System.out.print(selectionIndex++ + ". 마이페이지   ");
-			System.out.print(selectionIndex++ + ". 로그아웃   ");
+			System.out.print(selectionIndex++ + ". 내 게시글 조회   ");
+			System.out.print(selectionIndex++ + ". 마이페이지   \n");
+			System.out.print("  " + selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
 			System.out.print(selectionIndex++ + ". 댓글 작업  ");
 			if (UserSession.getInstance().isAdmin())
@@ -240,6 +240,12 @@ public class MainView {
 	 * 마이페이지
 	 */
 	public static void checkMyPage() {
+		int uuid = UserSession.getInstance().getUuid();
+		System.out.println("\n---- 마이페이지 ----");
+		BoardController.selectMyContentCnt(uuid);
+		BoardController.selectMyReplyCnt(uuid);
+		BoardController.selectMyLikeCnt(uuid);
+		System.out.println("----------------------");
 	}
 
 	/**
@@ -329,11 +335,7 @@ public class MainView {
 
 		ReplyDTO reply = new ReplyDTO(0, UserSession.getInstance().getNickName(), content, boardNo, null);
 		BoardController.replyInsert(reply);
-//		
-//		BoardDTO board = new BoardDTO(title, content, UserSession.getInstance().getNickName(),
-//				UserSession.getInstance().getUuid(), subject);
-//		board.setTag(null);
-//		BoardController.boardInsert(board);
+
 	}
 
 	/**
@@ -357,8 +359,9 @@ public class MainView {
 	 * 댓글 삭제
 	 */
 	public static void deleteReply() {
-//		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
-//		int boardNo = Integer.parseInt(sc.nextLine());
+
+		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
+		int boardNo = Integer.parseInt(sc.nextLine());
 
 		System.out.println("삭제할 댓글 번호는?");
 		int no = Integer.parseInt(sc.nextLine());

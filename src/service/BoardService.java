@@ -74,9 +74,33 @@ public interface BoardService {
 	void updateViewCnt(int boardNo) throws DMLException;
 
 	/**
+	 * 내가 받은 좋아요 수 가져오기
+	 * @return 좋아요 수
+	 * @throws DMLException
+	 */
+	int selectMyLikeCnt(int uuid) throws DMLException;
+
+	/**
+	 * 내가 쓴 글 개수
+	 */
+	int selectMyContentCnt(int uuid) throws DMLException;
+
+	/**
+	 * 내가 쓴 댓글 개수
+	 */
+	int selectMyReplyCnt(int uuid) throws DMLException;
+
+	/**
 	 * 오늘의 식사 가져오기
 	 */
 	MealDTO selectTodayMeal() throws DMLException;
+
+	/**
+	 * 식사 등록
+	 * @param mealDTO
+	 * @throws DMLException
+	 */
+	void insertTodayMeal(MealDTO mealDTO) throws DMLException;
 
 	/**
 	 * 부모글에 해당하는 댓글 리스트 가져오기

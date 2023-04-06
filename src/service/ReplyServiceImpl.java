@@ -31,7 +31,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<ReplyDTO> replySelectByBoardNo(int boardNo) throws SearchWrongException {
 		List<ReplyDTO> list = replyDAO.replySelectByBoardNo(boardNo);
 		if (list.isEmpty())
-			throw new SearchWrongException(boardNo + "번째 게시판의 댓글이 아직 없습니다...");
+			throw new SearchWrongException(boardNo + "번 게시글의 댓글이 아직 없습니다...");
 		return list;
 	}
 

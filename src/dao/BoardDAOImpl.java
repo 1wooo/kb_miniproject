@@ -440,6 +440,108 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public int selectMyLikeCnt(int uuid) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select sum(like_cnt) from boarddto where uuid = ?";
+		int myLikeCnt = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uuid);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				myLikeCnt = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			throw new DMLException("내가 받은 좋아요 수 조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+		return myLikeCnt;
+	}
+
+	@Override
+	public int selectMyContentCnt(int uuid) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from boarddto where uuid = ?";
+		int myContentCnt = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uuid);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				myContentCnt = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			throw new DMLException("내가 쓴 글 개수 조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+		return myContentCnt;
+	}
+
+	@Override
+	public int selectMyReplyCnt(int uuid) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from reply where uuid = ?";
+		int myreplyCnt = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, uuid);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				myreplyCnt = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			throw new DMLException("내가 쓴 댓글 개수 조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+		return myreplyCnt;
+	}
+
+	@Override
+	public int insertTodayMeal(MealDTO mealDTO) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "insert into meal VALUES(?, ?)";
+		int res = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mealDTO.getDate());
+			ps.setString(2, mealDTO.getMeal());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DMLException("메뉴 등록 실패");
+		}finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return res;
+	}
+
+
+	@Override
 	public MealDTO selectTodayMeal() throws DMLException {
 		Connection con = null;
 		PreparedStatement ps = null;

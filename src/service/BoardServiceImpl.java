@@ -137,6 +137,25 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public int selectMyLikeCnt(int uuid) throws DMLException {
+		int myLikeCnt = boardDAO.selectMyLikeCnt(uuid);
+		return myLikeCnt;
+	}
+
+	@Override
+	public int selectMyContentCnt(int uuid) throws DMLException {
+		int myContentCnt = boardDAO.selectMyContentCnt(uuid);
+		return myContentCnt;
+	}
+
+	@Override
+	public int selectMyReplyCnt(int uuid) throws DMLException {
+		int myReplyCnt = boardDAO.selectMyReplyCnt(uuid);
+		return myReplyCnt;
+	}
+
+
+	@Override
 	public MealDTO selectTodayMeal() throws DMLException {
 		MealDTO mealDTO = boardDAO.selectTodayMeal();
 		if (mealDTO == null) {
@@ -144,6 +163,13 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return mealDTO;
 	}
+
+	@Override
+	public void insertTodayMeal(MealDTO mealDTO) throws DMLException {
+		int res = boardDAO.insertTodayMeal(mealDTO);
+		if (res == 0) throw new DMLException("메뉴 등록 실패");
+	}
+
 
 	@Override
 	public List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException {
