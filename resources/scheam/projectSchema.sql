@@ -89,7 +89,7 @@ select * from USERDTO;
 --drop table MEAL;
 create table MEAL(
     today_date date not null primary key,--등록일
-	meal_content varchar2(100) not null--내용
+	meal_content varchar2(100) not null, CONSTRAINT meal_uq UNIQUE (meal_content)--내용
 );
 
 select * from meal where to_char(today_date) = to_char(sysdate);
