@@ -17,6 +17,7 @@ public class MainView {
 	 * 메뉴 선택 (동작 선택)
 	 */
 	public static void menuChoice() {
+		
 		while (true) {
 			int selectionIndex = 1;
 			System.out.println("\n----------------------------------------");
@@ -27,9 +28,9 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 마이페이지   ");
 			System.out.print(selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
+			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
-			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
 			System.out.print(selectionIndex + ". 앱 종료 ]");
 			
 
@@ -60,15 +61,15 @@ public class MainView {
 					checkTodayMeal();
 					break;
 				case 8:
+					replyChoice();
+					break;
+				case 9:
 					if (UserSession.getInstance().isAdmin()) {
 						insertTodayMeal();
 						break;
 					}
 					System.out.println("게시판 사용을 종료합니다.");
 					System.exit(0);
-					break;
-				case 9:
-					replyChoice();
 					break;
 				case 10:
 					if (UserSession.getInstance().isAdmin()) {
@@ -280,7 +281,7 @@ public class MainView {
 			}
 		}
 
-	}
+
 	
 	/**
 	 * 댓글 조회
