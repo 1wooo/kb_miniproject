@@ -123,9 +123,8 @@ public class SuccessView {
 		System.out.println(message);
 	}
 
-
 	/**
-	 * @author 서지수
+	 * @author 서지수, 임재현
 	 * @param 댓글 조회, 생성, 수정, 삭제 성공 뷰
 	 */
 
@@ -133,16 +132,54 @@ public class SuccessView {
 		for (ReplyDTO reply : replyList) {
 			System.out.println(" ⁕⁕⁕ " + reply);
 		}
+		Scanner sc = new Scanner(System.in);
+		int boardNo = replyList.get(0).getBoardNo();
+		boolean isAdmin = UserSession.getInstance().isAdmin();
+		boolean isMyBoard = true; // 부모 보드의 uuid 가져올 방법 필요
+//		boolean isMyBoard = UserSession.getInstance().getUuid() == boardNo;
+		final StringBuilder sb = new StringBuilder();
+		sb.append("----------------------------\n");
+		sb.append("추가로 선택할 작업을 선택해주세요.\n");
+		sb.append("1. 댓글 달기   ");
+		sb.append("2. 댓글 수정하기   ");
+		sb.append("3. 댓글 삭제하기   ");
+		if (isMyBoard) sb.append("4. 댓글 채택하기   ");
+		sb.append("\n----------------------------\n");
+		System.out.println(sb.toString());
+		try {
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:
+				MainView.insertReply(boardNo);
+				return;
+			case 2:
+				MainView.updateReply(boardNo);
+				break;
+			case 3:
+				if (!isMyBoard && !isAdmin) throw new NumberFormatException();
+				MainView.deleteReply(boardNo);
+				break;
+			case 4:
+				if (!isMyBoard) throw new NumberFormatException();
+//				댓글 채택
+//				MainView.
+				break;
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("잘못된 명령어입니다.");
+		}
+
 	}
 
-	/** 
+	/**
 	 * 오늘의 메뉴 출력
-	 * */
+	 */
 	public static void mealPrint(MealDTO mealDTO) {
-		final StringBuilder sb = new StringBuilder(); 
+		final StringBuilder sb = new StringBuilder();
 		sb.append(mealDTO.getDate()).append(" 오늘의 메뉴\n");
 		sb.append(mealDTO.getMeal());
 		System.out.println(sb.toString());
+
 	}
 
 }
