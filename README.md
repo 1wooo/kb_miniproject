@@ -189,10 +189,10 @@
   <th>서지수</th>
   <th>임재현</th>
 	<tr><!-- 첫번째 줄 시작 -->
-	    <td><img src="https://avatars.githubusercontent.com/u/86345526?v=4" width="100"/></td>
-	    <td><img src="#" width="100"/></td>
-       <td><img src="https://avatars.githubusercontent.com/u/76681519?v=4" width="100"/></td>
-	    <td><img src="https://avatars.githubusercontent.com/u/32118818?v=4" width="100"/></td>
+	    <td><img src="https://avatars.githubusercontent.com/u/86345526?v=4" width="200"/></td>
+	    <td><img src="#" width="200"/></td>
+       <td><img src="https://avatars.githubusercontent.com/u/76681519?v=4" width="200"/></td>
+	    <td><img src="https://avatars.githubusercontent.com/u/32118818?v=4" width="200"/></td>
 	</tr><!-- 첫번째 줄 끝 -->
 	<tr><!-- 두번째 줄 시작 -->
 	    <td>
