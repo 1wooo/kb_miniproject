@@ -367,7 +367,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public int replyInsert(ReplyDTO replyDTO) throws DMLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "insert into REPLY values (reply_seq.nextval, ?, ?, ?, sysdate);";
+		String sql = "insert into REPLY values (reply_seq.nextval, ?, ?, ?, ?, sysdate);";
 		int res = 0;
 		try {
 			con = DBManager.getConnection();
