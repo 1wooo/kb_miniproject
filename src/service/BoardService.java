@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
@@ -53,7 +54,26 @@ public interface BoardService {
 	 */
 	void boardDelete(int boardNo) throws DMLException;
 
+
+	/**
+	 * 댓글 작성
+	 */
 	void insertReply(ReplyDTO replyDTO) throws DMLException;
+
+	/**
+	 * 좋아요 반영
+	 */
+	void updateLikeCnt(int boardNo) throws DMLException;
+
+	/**
+	 * 조회수 증가
+	 */
+	void updateViewCnt(int boardNo) throws DMLException;
+
+	/**
+	 * 오늘의 식사 가져오기
+	 */
+	MealDTO selectTodayMeal() throws DMLException;
 
 	/**
 	 * 부모글에 해당하는 댓글 리스트 가져오기

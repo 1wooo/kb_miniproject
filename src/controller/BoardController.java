@@ -94,10 +94,36 @@ public class BoardController {
         }
     }
 
+    public static void updateLikeCnt(int boardNO) {
+        try {
+            boardService.updateLikeCnt(boardNO);
+            SuccessView.messagePrint("좋아요가 반영 되었습니다.");
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
+    public static void updateViewCnt(int boardNo) {
+        try {
+            boardService.updateViewCnt(boardNo);
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
     public static void replyInsert(ReplyDTO replyDTO) {
         try {
             boardService.insertReply(replyDTO);
             SuccessView.messagePrint("댓글을 작성했습니다.");
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
+    public static void selectTodayMeal() {
+        try {
+            boardService.selectTodayMeal();
+//            SuccessView
         } catch (DMLException e) {
             FailView.errorMessage(e.getMessage());
         }

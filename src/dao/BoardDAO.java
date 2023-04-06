@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.replydto.*;
 import exception.*;
 
@@ -74,13 +75,21 @@ public interface BoardDAO {
 	/**
 	 * 좋아요 누르기
 	 */
+	int updateLikeCnt(int boardNo) throws DMLException;
 
 	/**
 	 * 조회하면 자동으로 조회수 증가
 	 */
+	int updateViewCnt(int boardNo) throws DMLException;
+
+	/**
+	 * 식사 가져오기
+	 */
+	MealDTO selectTodayMeal() throws DMLException;
 
 	/**
 	 * 질문 해결 시 해결로 변경
 	 */
+
 
 }
