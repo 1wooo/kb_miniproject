@@ -1,5 +1,8 @@
 package dto.replydto;
-
+/**
+ * @author 서지수
+ * @param ReplyDTO 댓글
+ */
 public class ReplyDTO {
     private int replyNo;
     private String replyWriter;
