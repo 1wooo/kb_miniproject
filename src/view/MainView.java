@@ -29,8 +29,9 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
-			System.out.print(selectionIndex + ". 앱 종료 ]");
 			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
+			System.out.print(selectionIndex + ". 앱 종료 ]");
+			
 
 			System.out.println("\n--------------------------------------------");
 			System.out.println("원하는 작업을 숫자로 입력해주세요.");
@@ -67,15 +68,15 @@ public class MainView {
 					System.exit(0);
 					break;
 				case 9:
+					replyChoice();
+					break;
+				case 10:
 					if (UserSession.getInstance().isAdmin()) {
 						System.out.println("게시판 사용을 종료합니다.");
 						System.exit(0);
 						break;
 					} else
 						throw new NumberFormatException();
-				case 10:
-					replyChoice();
-					break;
 				default:
 					throw new NumberFormatException();
 				}
