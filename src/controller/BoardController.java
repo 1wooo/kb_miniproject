@@ -169,8 +169,8 @@ public class BoardController {
 
 	public static void selectTodayMeal() {
 		try {
-			boardService.selectTodayMeal();
-//            SuccessView
+			MealDTO mealDTO = boardService.selectTodayMeal();
+			SuccessView.mealPrint(mealDTO);
 		} catch (DMLException e) {
 			FailView.errorMessage(e.getMessage());
 		}
