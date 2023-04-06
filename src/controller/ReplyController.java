@@ -25,7 +25,7 @@ public class ReplyController {
 	public static void replySelectByBoardNo(int boardNo) {
 		try {
 			List<ReplyDTO> replyList = replyService.replySelectByBoardNo(boardNo);
-			SuccessView.searchReplyPrint(replyList);
+			SuccessView.searchReplyPrint(replyList, boardNo);
 
 		} catch (SearchWrongException e) {
 			// e.printStackTrace();
