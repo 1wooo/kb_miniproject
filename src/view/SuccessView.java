@@ -10,8 +10,8 @@ import dto.userdto.UserSession;
 public class SuccessView {
 	public static String getPreview(BoardDTO board) { // 특정 게시글의 미리보기를 제공
 		final StringBuilder sb = new StringBuilder();
-		sb.append(board.getBoardNo()).append(" | ");
-		sb.append(board.getTitle()).append(" | ");
+		sb.append(String.format("%-4d", board.getBoardNo())).append(" | ");
+		sb.append(String.format("%15s", board.getTitle())).append(" | ");
 		sb.append(board.getWriter()).append(" | ");
 		sb.append(board.getBoardDate());
 
