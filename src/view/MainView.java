@@ -110,7 +110,6 @@ public class MainView {
 		}
 		BoardController.boardSelectBySubject(subject);
 
-
 	}
 
 	/**
@@ -148,7 +147,8 @@ public class MainView {
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-		BoardDTO board = new BoardDTO(title, content, UserSession.getInstance().getNickName(), UserSession.getInstance().getUuid(), subject);
+		BoardDTO board = new BoardDTO(title, content, UserSession.getInstance().getNickName(),
+				UserSession.getInstance().getUuid(), subject);
 		board.setTag(null);
 		BoardController.boardInsert(board);
 	}
@@ -156,8 +156,37 @@ public class MainView {
 	/**
 	 * 게시글 수정
 	 */
-	public static void updateBoard() {
-		
+	public static void updateBoard(BoardDTO boardDTO) {
+		System.out.println("수정할 게시글의 제목을 입력해주세요. 입력이 없으면 제목이 유지됩니다.");
+		String title = sc.nextLine();
+		System.out.println("수정할 게시글의 내용을 입력해주세요. 입력이 없으면 내용이 유지됩니다.");
+		String content = sc.nextLine();
+		if (!title.isBlank()) boardDTO.setTitle(title); 
+		if (!content.isBlank()) boardDTO.setContent(content); 
+		BoardController.boardUpdate(boardDTO);
+	}
+
+	/**
+	 * 게시글 삭제
+	 */
+	public static void deleteBoard(int boardNo) {
+		System.out.println("게시글을 삭제하시겠습니까?");
+		System.out.print("1. 삭제   ");
+		System.out.println("2. 취소   ");
+		try {
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1:
+				BoardController.boardDelete(boardNo);
+				break;
+			case 2:
+				break;
+			default:
+				throw new NumberFormatException();
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("원하는 게시판을 1 ~ 2 사이의 숫자로 입력해주세요.");
+		}
 	}
 
 	/**
@@ -193,12 +222,6 @@ public class MainView {
 	 * 내 게시글 조회
 	 */
 	public static void checkMyBoard() {
-		// 1. 조회
-		// 2. 수정
-		// 3. 삭제
-
-		// 입력으로 boardNo, 조회 혹은 수정
-
 		BoardController.boardSelectByUserId(UserSession.getInstance().getUuid());
 	}
 
