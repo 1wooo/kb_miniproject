@@ -1,5 +1,8 @@
 package dto.replydto;
-
+/**
+ * @author 서지수
+ * @param ReplyDTO를 상속받는 QuestionReply(질문게시판 댓글)
+ */
 public class QuestionReply extends ReplyDTO{
 	private int selectedReply;
 
