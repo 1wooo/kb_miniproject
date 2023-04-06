@@ -91,7 +91,7 @@ public class SuccessView {
 			case 1:
 				return;
 			case 2:
-				// TODO: 댓글 뷰 호출해서 조회
+				ReplyController.replySelectByBoardNo(board.getBoardNo());
 				break;
 			case 3:
 				BoardController.updateLikeCnt(board.getBoardNo());
