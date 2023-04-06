@@ -92,6 +92,8 @@ public class MainView {
 		System.out.println("1. 공지   ");
 		System.out.println("2. 자유   ");
 		System.out.println("3. 질문   ");
+		System.out.println("4. 조회수 랭킹");
+		System.out.println("5. 좋아요 랭킹");
 		System.out.println("\n--------------------------------------------");
 		System.out.println("원하는 게시판을 숫자로 입력해주세요.");
 		String subject = "";
@@ -107,6 +109,12 @@ public class MainView {
 			case 3:
 				subject = "question";
 				break;
+			case 4:
+				BoardController.boardSelectByView();
+				return;
+			case 5:
+				BoardController.boardSelectByLike();
+				return;
 			default:
 				throw new NumberFormatException();
 			}
