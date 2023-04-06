@@ -45,6 +45,7 @@ create table REPLY(
   reply_writer varchar2(20) not null, --댓글작성자
   reply_content varchar2(100) not null, --댓글내용
   board_no int references BOARDDTO(board_no), --댓글을 달 부모글번호
+  uuid int references USERDTO(uuid),--유저 아이디
   reply_date date, --등록일
   selected_reply int unique
 );
@@ -52,13 +53,15 @@ create table REPLY(
 --drop sequence reply_seq;
 create sequence reply_seq nocache; 
 
-insert into REPLY values (reply_seq.nextval, '재현','그러게', 45, sysdate,null);
-insert into REPLY values (reply_seq.nextval, '원우','나두', 45, sysdate,null);
-insert into REPLY values (reply_seq.nextval, '지수','나가자!', 45, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '재현','그러게', 45,27, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '원우','나두', 45,30, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '지수','나가자!', 45,28, sysdate,null);
 --질문게시판
-insert into REPLY values (reply_seq.nextval, '이프로','3번 지각하면 1번 결석이 됩니다.', 47, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '이프로','3번 지각하면 1번 결석이 됩니다.', 47,32, sysdate,null);
+--delete from reply where reply_no=25; 
 
 select * from REPLY;
+
 
 --drop table USERDTO;
 create table USERDTO(
