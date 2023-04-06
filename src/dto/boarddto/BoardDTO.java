@@ -116,16 +116,30 @@ public class BoardDTO {
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
-		sb.append("boardNo=").append(boardNo);
-		sb.append(", title='").append(title).append(" | ");
-		sb.append(", content='").append(content).append(" | ");
-		sb.append(", writer='").append(writer).append(" | ");
-		sb.append(", uuid=").append(uuid);
-		sb.append(", subject='").append(subject).append(" | ");
-		sb.append(", tag='").append(tag).append(" | ");
-		sb.append(", likeCnt=").append(likeCnt);
-		sb.append(", viewCnt=").append(viewCnt);
-		sb.append(", boardDate='").append(boardDate).append(" | ");
+		String sub = "";
+		switch (subject) {
+		case "free":
+			sub = "자유";
+			break;
+		case "notice":
+			sub = "공지";
+			break;
+		case "question":
+			sub = "질문";
+			break;
+		}
+		// 글번호 4d + 제목 15s
+		// 작성자 10s + 게시판 + "조회수" + 조회수 4d + "좋아요" + 좋아요 3d
+		// 내용은 줄바꿈하고 제한없이
+		sb.append(String.format("%4d", boardNo)).append("번째 글 | [");
+		sb.append(sub).append("] | ");
+		sb.append(title).append("\n");
+		sb.append("작성자 ").append(String.format("%-10s", writer)).append(" | ");
+		sb.append("조회수 ").append(String.format("%-4s", viewCnt));
+		sb.append("좋아요 ").append(String.format("%-4s", likeCnt)).append(" | ");
+		sb.append("작성일자 ").append(String.format("%-10s", boardDate)).append("\n---------------------------------------------------\n");
+		sb.append(content).append("\n");
+
 		return sb.toString();
 	}
 }
