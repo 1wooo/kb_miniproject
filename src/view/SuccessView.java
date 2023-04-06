@@ -97,8 +97,10 @@ public class SuccessView {
 				ReplyController.replySelectByBoardNo(board.getBoardNo());
 				break;
 			case 3:
-				if (board.getUuid() == UserSession.getInstance().getUuid()) System.out.println("내 글은 좋아요를 누를 수 없습니다.");
-				else BoardController.updateLikeCnt(board.getBoardNo());
+				if (board.getUuid() == UserSession.getInstance().getUuid())
+					System.out.println("내 글은 좋아요를 누를 수 없습니다.");
+				else
+					BoardController.updateLikeCnt(board.getBoardNo());
 				break;
 			case 4:
 				if (!isMyBoard && !isAdmin) {
@@ -129,12 +131,12 @@ public class SuccessView {
 	 * @param 댓글 조회, 생성, 수정, 삭제 성공 뷰
 	 */
 
-	public static void searchReplyPrint(List<ReplyDTO> replyList) {
+	public static void searchReplyPrint(List<ReplyDTO> replyList, int boardNo) {
 		for (ReplyDTO reply : replyList) {
 			System.out.println(" ⁕⁕⁕ " + reply);
 		}
 		Scanner sc = new Scanner(System.in);
-		int boardNo = replyList.get(0).getBoardNo();
+
 		boolean isAdmin = UserSession.getInstance().isAdmin();
 		boolean isMyBoard = true; // 부모 보드의 uuid 가져올 방법 필요
 //		boolean isMyBoard = UserSession.getInstance().getUuid() == boardNo;
@@ -144,7 +146,6 @@ public class SuccessView {
 		sb.append("1. 댓글 달기   ");
 		sb.append("2. 댓글 수정하기   ");
 		sb.append("3. 댓글 삭제하기   ");
-		if (isMyBoard) sb.append("4. 댓글 채택하기   ");
 		sb.append("\n----------------------------\n");
 		System.out.println(sb.toString());
 		try {
@@ -157,13 +158,9 @@ public class SuccessView {
 				MainView.updateReply(boardNo);
 				break;
 			case 3:
-				if (!isMyBoard && !isAdmin) throw new NumberFormatException();
+				if (!isMyBoard && !isAdmin)
+					throw new NumberFormatException();
 				MainView.deleteReply(boardNo);
-				break;
-			case 4:
-				if (!isMyBoard) throw new NumberFormatException();
-//				댓글 채택
-//				MainView.
 				break;
 			}
 		} catch (NumberFormatException e) {
