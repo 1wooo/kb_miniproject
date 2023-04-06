@@ -62,13 +62,13 @@ public class ReplyDTO {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ReplyDTO{");
-        sb.append("replyNo=").append(replyNo);
-        sb.append(", replyWriter='").append(replyWriter).append('\'');
-        sb.append(", replyContent='").append(replyContent).append('\'');
-        sb.append(", boardNo=").append(boardNo);
-        sb.append(", replyDate='").append(replyDate).append('\'');
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder("[ ");
+        sb.append("댓글번호 ").append(replyNo);
+        sb.append(", 작성자='").append(replyWriter).append('\'');
+        sb.append(", 댓글 내용='").append(replyContent).append('\'');
+//        sb.append(", boardNo=").append(boardNo);
+        sb.append(", 작성 날짜'").append(replyDate).append('\'');
+        sb.append(" ]");
         return sb.toString();
     }
 }
