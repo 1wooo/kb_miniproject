@@ -28,7 +28,7 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 마이페이지   \n");
 			System.out.print("  " + selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
-			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
+			System.out.print(selectionIndex++ + ". 댓글 작업  ");
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
 			System.out.print(selectionIndex + ". 앱 종료 ]");
@@ -333,8 +333,9 @@ public class MainView {
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-		ReplyDTO reply = new ReplyDTO(0, writer, content, boardNo, null);
+		ReplyDTO reply = new ReplyDTO(0, UserSession.getInstance().getNickName(), content, boardNo, null);
 		BoardController.replyInsert(reply);
+
 	}
 
 	/**
@@ -358,6 +359,7 @@ public class MainView {
 	 * 댓글 삭제
 	 */
 	public static void deleteReply() {
+
 		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
 		int boardNo = Integer.parseInt(sc.nextLine());
 

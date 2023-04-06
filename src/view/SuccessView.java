@@ -8,6 +8,7 @@ import controller.ReplyController;
 import dto.boarddto.BoardDTO;
 import dto.mealdto.MealDTO;
 import dto.userdto.UserSession;
+import dto.replydto.ReplyDTO;
 
 public class SuccessView {
 	public static String getPreview(BoardDTO board) { // 특정 게시글의 미리보기를 제공
@@ -23,7 +24,7 @@ public class SuccessView {
 	/**
 	 * @author jaehyun
 	 * @param List<BoardDTO> list 열람 가능한 게시글 리스트
-	 * @param pageIndex 현재 열람중인 페이지 번호
+	 * @param pageIndex      현재 열람중인 페이지 번호
 	 * @description 게시판 페이지 번호에 맞게 최대 10개의 게시글 리스트를 확인
 	 */
 	public static void boardListPrint(List<BoardDTO> list, int pageIndex) {
@@ -122,6 +123,18 @@ public class SuccessView {
 		System.out.println(message);
 	}
 
+
+	/**
+	 * @author 서지수
+	 * @param 댓글 조회, 생성, 수정, 삭제 성공 뷰
+	 */
+
+	public static void searchReplyPrint(List<ReplyDTO> replyList) {
+		for (ReplyDTO reply : replyList) {
+			System.out.println(" ⁕⁕⁕ " + reply);
+		}
+	}
+
 	/** 
 	 * 오늘의 메뉴 출력
 	 * */
@@ -131,4 +144,5 @@ public class SuccessView {
 		sb.append(mealDTO.getMeal());
 		System.out.println(sb.toString());
 	}
+
 }
