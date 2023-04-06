@@ -121,4 +121,13 @@ public class SuccessView {
 		System.out.println(message);
 	}
 
+	/** 
+	 * 오늘의 메뉴 출력
+	 * */
+	public static void mealPrint(MealDTO mealDTO) {
+		final StringBuilder sb = new StringBuilder(); 
+		sb.append(mealDTO.getDate()).append(" 오늘의 메뉴\n");
+		sb.append(mealDTO.getMeal());
+		System.out.println(sb.toString());
+	}
 }
