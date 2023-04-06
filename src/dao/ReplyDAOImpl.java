@@ -13,7 +13,10 @@ import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
 import common.DBManager;
-
+/**
+ * @author 서지수
+ * @param 댓글daoimpl
+ */
 public class ReplyDAOImpl implements ReplyDAO {
 
 	private static ReplyDAO instance = new ReplyDAOImpl();

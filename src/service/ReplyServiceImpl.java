@@ -11,7 +11,10 @@ import dto.replydto.QuestionReply;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
-
+/**
+ * @author 서지수
+ * @param 댓글서비스impl
+ */
 public class ReplyServiceImpl implements ReplyService {
 	private static ReplyService instance = new ReplyServiceImpl();
 
@@ -51,7 +54,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public void replySelect(QuestionReply quetionReplyDTO) throws DMLException {
 		int result = replyDAO.replySelect(quetionReplyDTO);
 		if (result == 0)
-			throw new DMLException("댓글 수정에 실패했습니다.");
+			throw new DMLException("댓글 채택에 실패했습니다.");
 	}
 
 }

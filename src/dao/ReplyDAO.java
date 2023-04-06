@@ -8,7 +8,10 @@ import dto.replydto.QuestionReply;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
-
+/**
+ * @author 서지수
+ * @param 댓글dao
+ */
 public interface ReplyDAO {
 	/**
 	 * 댓글 게시글별검색
