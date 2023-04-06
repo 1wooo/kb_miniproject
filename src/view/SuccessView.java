@@ -97,7 +97,8 @@ public class SuccessView {
 				ReplyController.replySelectByBoardNo(board.getBoardNo());
 				break;
 			case 3:
-				System.out.println("내 글은 좋아요를 누를 수 없습니다!!");
+				if (board.getUuid() == UserSession.getInstance().getUuid()) System.out.println("내 글은 좋아요를 누를 수 없습니다.");
+				else BoardController.updateLikeCnt(board.getBoardNo());
 				break;
 			case 4:
 				if (!isMyBoard && !isAdmin) {
