@@ -2,11 +2,8 @@ package service;
 
 import java.util.List;
 
-import dao.BoardDAO;
-import dao.BoardDAOImpl;
 import dao.ReplyDAO;
 import dao.ReplyDAOImpl;
-import dto.boarddto.BoardDTO;
 import dto.replydto.QuestionReply;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
@@ -30,8 +27,8 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public List<ReplyDTO> replySelectByBoardNo(int boardNo) throws SearchWrongException {
 		List<ReplyDTO> list = replyDAO.replySelectByBoardNo(boardNo);
-		if (list.isEmpty())
-			throw new SearchWrongException(boardNo + "번 게시글의 댓글이 아직 없습니다...");
+//		if (list.isEmpty())
+//			throw new SearchWrongException(boardNo + "번 게시글의 댓글이 아직 없습니다...");
 		return list;
 	}
 
