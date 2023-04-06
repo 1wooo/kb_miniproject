@@ -96,7 +96,7 @@ public class SuccessView {
 				ReplyController.replySelectByBoardNo(board.getBoardNo());
 				break;
 			case 3:
-				BoardController.updateLikeCnt(board.getBoardNo());
+				System.out.println("내 글은 좋아요를 누를 수 없습니다!!");
 				break;
 			case 4:
 				if (!isMyBoard && !isAdmin) {
