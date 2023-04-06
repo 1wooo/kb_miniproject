@@ -82,3 +82,13 @@ insert into USERDTO values (uuid_seq.nextval, 'ssam','scott','희정샘', 'Y', n
 insert into USERDTO values (uuid_seq.nextval, 'pro','tiger','이프로', 'Y', null);
 
 select * from USERDTO;
+
+--drop table MEAL;
+create table MEAL(
+    today_date date not null primary key,--등록일
+	meal_content varchar2(100) not null--내용
+);
+
+select * from meal where to_char(today_date) = to_char(sysdate);
+select * from meal;
+insert into meal VALUES(sysdate, '치킨,피자,콜라');
