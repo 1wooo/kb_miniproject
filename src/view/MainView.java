@@ -28,7 +28,6 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 마이페이지   \n");
 			System.out.print("  " + selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
-			System.out.print(selectionIndex++ + ". 댓글 작업  ");
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
 			System.out.print(selectionIndex + ". 앱 종료 ]");
@@ -60,9 +59,6 @@ public class MainView {
 					checkTodayMeal();
 					break;
 				case 8:
-					replyChoice();
-					break;
-				case 9:
 					if (UserSession.getInstance().isAdmin()) {
 						insertTodayMeal();
 						break;
@@ -70,7 +66,7 @@ public class MainView {
 					System.out.println("게시판 사용을 종료합니다.");
 					System.exit(0);
 					break;
-				case 10:
+				case 9:
 					if (UserSession.getInstance().isAdmin()) {
 						System.out.println("게시판 사용을 종료합니다.");
 						System.exit(0);
@@ -270,70 +266,17 @@ public class MainView {
 	}
 
 	/**
-	 * @author 서지수
-	 * @param 댓글 관련 뷰
-	 */
-
-	/**
-	 * 댓글 메뉴 선택 (동작 선택)
-	 */
-	public static void replyChoice() {
-		int selectionIndex = 1;
-		System.out.println("\n----------------------------------------");
-		System.out.print("[ " + selectionIndex++ + ". 댓글 조회   ");
-		System.out.print(selectionIndex++ + ". 댓글 작성   ");
-		System.out.print(selectionIndex++ + ". 댓글 수정   ");
-		System.out.print(selectionIndex++ + ". 댓글 삭제  ");
-
-		System.out.println("\n--------------------------------------------");
-		System.out.println("원하는 작업을 숫자로 입력해주세요.");
-		try {
-			int menu = Integer.parseInt(sc.nextLine());
-			switch (menu) {
-			case 1: // 댓글 조회
-				searchReply();
-				break;
-			case 2: // 댓글 작성
-				insertReply();
-				break;
-			case 3: // 댓글 수정
-				updateReply();
-				break;
-			case 4: // 댓글 삭제
-				deleteReply();
-				break;
-			default:
-				throw new NumberFormatException();
-			}
-
-		} catch (NumberFormatException e) {
-			System.out.println("원하는 작업을 1 ~ " + selectionIndex + " 사이의 숫자로 입력해주세요.");
-		}
-	}
-
-	/**
-	 * 댓글 조회
-	 */
-	public static void searchReply() {
-		System.out.println("검색하려는 댓글의 부모 글번호 ?");
-		int boardNo = Integer.parseInt(sc.nextLine());
-		ReplyController.replySelectByBoardNo(boardNo);
-	}
-
-	/**
 	 * 댓글 작성
 	 */
-	public static void insertReply() {
-		System.out.println("작성하려는 댓글의 부모 글번호 ?");
-		int boardNo = Integer.parseInt(sc.nextLine());
-
-		System.out.println("작성자?");
-		String writer = sc.nextLine();
+	public static void insertReply(int boardNo) {
+		String writer = UserSession.getInstance().getNickName();
+		int uuid = UserSession.getInstance().getUuid();
 
 		System.out.println("내용은?");
 		String content = sc.nextLine();
 
-		ReplyDTO reply = new ReplyDTO(0, UserSession.getInstance().getNickName(), content, boardNo, null);
+		ReplyDTO reply = new ReplyDTO(0, writer, content, boardNo, null);
+		reply.setUuid(uuid);
 		BoardController.replyInsert(reply);
 
 	}
@@ -341,10 +284,7 @@ public class MainView {
 	/**
 	 * 댓글 수정
 	 */
-	public static void updateReply() {
-		System.out.println("수정하려는 댓글의 부모 글번호 ?");
-		int boardNo = Integer.parseInt(sc.nextLine());
-
+	public static void updateReply(int boardNo) {
 		System.out.println("수정할 댓글 번호는?");
 		int no = Integer.parseInt(sc.nextLine());
 
@@ -358,14 +298,14 @@ public class MainView {
 	/**
 	 * 댓글 삭제
 	 */
-	public static void deleteReply() {
-
-		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
-		int boardNo = Integer.parseInt(sc.nextLine());
-
+	public static void deleteReply(int replyNo) {
 		System.out.println("삭제할 댓글 번호는?");
-		int no = Integer.parseInt(sc.nextLine());
-		ReplyController.replyDelete(no);
+		try {
+			int no = Integer.parseInt(sc.nextLine());
+			ReplyController.replyDelete(no);
+		} catch (NumberFormatException e) {
+			System.out.println("잘못된 명령어입니다.");
+		}
 	}
 
 }
