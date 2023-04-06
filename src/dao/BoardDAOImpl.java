@@ -123,9 +123,8 @@ public class BoardDAOImpl implements BoardDAO {
 		return toplikeBoard;
 	}
 
-
 	@Override
-		public List<BoardDTO> boardSelectByUserId(int userId) throws SearchWrongException {
+	public List<BoardDTO> boardSelectByUserId(int userId) throws SearchWrongException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -246,6 +245,9 @@ public class BoardDAOImpl implements BoardDAO {
 		List<BoardDTO> list = new ArrayList<>();
 		String sql = "select * from boarddto order by like_cnt asc";
 		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				BoardDTO dto = new BoardDTO(rs.getInt("board_no"), rs.getString("title"), rs.getString("content"),
 						rs.getString("writer"), rs.getInt("uuid"), rs.getString("subject"), rs.getString("tag"),
@@ -271,6 +273,9 @@ public class BoardDAOImpl implements BoardDAO {
 		List<BoardDTO> list = new ArrayList<>();
 		String sql = "select * from boarddto order by view_cnt asc";
 		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				BoardDTO dto = new BoardDTO(rs.getInt("board_no"), rs.getString("title"), rs.getString("content"),
 						rs.getString("writer"), rs.getInt("uuid"), rs.getString("subject"), rs.getString("tag"),
@@ -378,7 +383,7 @@ public class BoardDAOImpl implements BoardDAO {
 			ps.setInt(4, replyDTO.getUuid());
 
 			res = ps.executeUpdate();
-			
+
 		} catch (SQLException e) {
 //			e.printStackTrace();
 			throw new DMLException("댓글 작성에 실패했습니다.");
@@ -534,12 +539,11 @@ public class BoardDAOImpl implements BoardDAO {
 
 		} catch (SQLException e) {
 			throw new DMLException("메뉴 등록 실패");
-		}finally {
+		} finally {
 			DBManager.releaseConnection(con, ps);
 		}
 		return res;
 	}
-
 
 	@Override
 	public MealDTO selectTodayMeal() throws DMLException {
@@ -566,6 +570,5 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		return mealDTO;
 	}
-
 
 }
