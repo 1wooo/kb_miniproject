@@ -75,7 +75,7 @@ public class LoginDAOImpl implements LoginDAO {
 
             res = ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             throw new SignupWrongException("아이디를 다시 설정해주시기 바랍니다.");
         }finally {
             DBManager.releaseConnection(con, ps);

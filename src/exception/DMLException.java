@@ -1,8 +1,7 @@
 package exception;
 /**
- * 작성자 : 서지수
- * insert, update, delete 결과 오류 시의 예외처리
- *
+ * @author 서지수
+ * @param insert, update, delete 오류 예외처리
  */
 public class DMLException extends RuntimeException{
 	public DMLException() {};

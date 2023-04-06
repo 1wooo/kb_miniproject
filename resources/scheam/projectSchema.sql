@@ -59,18 +59,19 @@ insert into REPLY values (reply_seq.nextval, '지수','나가자!', 45,28, sysda
 --질문게시판
 insert into REPLY values (reply_seq.nextval, '이프로','3번 지각하면 1번 결석이 됩니다.', 47,32, sysdate,null);
 --delete from reply where reply_no=25; 
+
 select * from REPLY;
 
 
 --drop table USERDTO;
 create table USERDTO(
 	uuid int primary key, --유저 고유번호
-	user_id varchar2(20) not null unique, --로그인 아이디
+	user_id varchar2(20), CONSTRAINT userId_uq UNIQUE (user_id), --로그인 아이디
 	pass_word varchar2(20) not null,--로그인 패스워드
     nick_name varchar2(20) not null,--닉네임
     is_admin CHAR(1), --관리자 여부
     is_banned CHAR(1)
-); 
+);
 --DROP sequence uuid_seq;
 create sequence uuid_seq nocache; 
 --일반 유저
@@ -84,3 +85,13 @@ insert into USERDTO values (uuid_seq.nextval, 'ssam','scott','희정샘', 'Y', n
 insert into USERDTO values (uuid_seq.nextval, 'pro','tiger','이프로', 'Y', null);
 
 select * from USERDTO;
+
+--drop table MEAL;
+create table MEAL(
+    today_date date not null primary key,--등록일
+	meal_content varchar2(100) not null--내용
+);
+
+select * from meal where to_char(today_date) = to_char(sysdate);
+select * from meal;
+insert into meal VALUES(sysdate, '치킨,피자,콜라');

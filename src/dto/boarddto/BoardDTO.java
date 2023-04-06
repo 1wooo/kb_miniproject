@@ -1,125 +1,145 @@
 package dto.boarddto;
 
 public class BoardDTO {
-    private int boardNo;
-    private String title;
-    private String content;
-    private String writer;
-    private int uuid;
-    private String subject;
-    private String tag;
-    private int likeCnt; // Like Table 생기면 삭제
-    private int viewCnt;
-    private String boardDate;
+	private int boardNo;
+	private String title;
+	private String content;
+	private String writer;
+	private int uuid;
+	private String subject;
+	private String tag;
+	private int likeCnt; // Like Table 생기면 삭제
+	private int viewCnt;
+	private String boardDate;
 
-    public BoardDTO(){}
+	public BoardDTO() {
+	}
 
-    public BoardDTO(int boardNo, String title, String content, String writer, int uuid, String subject, String tag, int likeCnt, int viewCnt, String boardDate) {
-        this.boardNo = boardNo;
-        this.title = title;
-        this.content = content;
-        this.writer = writer;
-        this.uuid = uuid;
-        this.subject = subject;
-        this.tag = tag;
-        this.likeCnt = likeCnt;
-        this.viewCnt = viewCnt;
-        this.boardDate = boardDate;
-    }
+	public BoardDTO(String title, String content, String writer, int uuid, String subject) {
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.uuid = uuid;
+		this.subject = subject;
+	}
 
-    public int getBoardNo() {
-        return boardNo;
-    }
+	public BoardDTO(int boardNo, String title, String content, String writer, int uuid, String subject, String tag,
+			int likeCnt, int viewCnt, String boardDate) {
+		this(title, content, writer, uuid, subject);
+		this.boardNo = boardNo;
+		this.tag = tag;
+		this.likeCnt = likeCnt;
+		this.viewCnt = viewCnt;
+		this.boardDate = boardDate;
+	}
 
-    public void setBoardNo(int boardNo) {
-        this.boardNo = boardNo;
-    }
+	public int getBoardNo() {
+		return boardNo;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public String getWriter() {
-        return writer;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public void setWriter(String writer) {
-        this.writer = writer;
-    }
+	public String getWriter() {
+		return writer;
+	}
 
-    public int getUuid() {
-        return uuid;
-    }
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 
-    public void setUuid(int uuid) {
-        this.uuid = uuid;
-    }
+	public int getUuid() {
+		return uuid;
+	}
 
-    public String getSubject() {
-        return subject;
-    }
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
+	}
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+	public String getSubject() {
+		return subject;
+	}
 
-    public String getTag() {
-        return tag;
-    }
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
+	public String getTag() {
+		return tag;
+	}
 
-    public int getLikeCnt() {
-        return likeCnt;
-    }
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 
-    public void setLikeCnt(int likeCnt) {
-        this.likeCnt = likeCnt;
-    }
+	public int getLikeCnt() {
+		return likeCnt;
+	}
 
-    public int getViewCnt() {
-        return viewCnt;
-    }
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
 
-    public void setViewCnt(int viewCnt) {
-        this.viewCnt = viewCnt;
-    }
+	public int getViewCnt() {
+		return viewCnt;
+	}
 
-    public String getBoardDate() {
-        return boardDate;
-    }
+	public void setViewCnt(int viewCnt) {
+		this.viewCnt = viewCnt;
+	}
 
-    public void setBoardDate(String boardDate) {
-        this.boardDate = boardDate;
-    }
+	public String getBoardDate() {
+		return boardDate;
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("boardNo=").append(boardNo);
-        sb.append(", title='").append(title).append(" | ");
-        sb.append(", content='").append(content).append(" | ");
-        sb.append(", writer='").append(writer).append(" | ");
-        sb.append(", uuid=").append(uuid);
-        sb.append(", subject='").append(subject).append(" | ");
-        sb.append(", tag='").append(tag).append(" | ");
-        sb.append(", likeCnt=").append(likeCnt);
-        sb.append(", viewCnt=").append(viewCnt);
-        sb.append(", boardDate='").append(boardDate).append(" | ");
-        return sb.toString();
-    }
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
+	}
+
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		String sub = "";
+		switch (subject) {
+		case "free":
+			sub = "자유";
+			break;
+		case "notice":
+			sub = "공지";
+			break;
+		case "question":
+			sub = "질문";
+			break;
+		}
+		// 글번호 4d + 제목 15s
+		// 작성자 10s + 게시판 + "조회수" + 조회수 4d + "좋아요" + 좋아요 3d
+		// 내용은 줄바꿈하고 제한없이
+		sb.append(String.format("%4d", boardNo)).append("번째 글 | [");
+		sb.append(sub).append("] | ");
+		sb.append(title).append("\n");
+		sb.append("작성자 ").append(String.format("%-10s", writer)).append(" | ");
+		sb.append("조회수 ").append(String.format("%-4s", viewCnt));
+		sb.append("좋아요 ").append(String.format("%-4s", likeCnt)).append(" | ");
+		sb.append("작성일자 ").append(String.format("%-10s", boardDate)).append("\n--------------------------내용-------------------------\n");
+		sb.append(content).append("\n");
+
+		return sb.toString();
+	}
 }

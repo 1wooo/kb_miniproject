@@ -1,9 +1,6 @@
 package controller;
 
-import dao.LoginDAO;
-import dao.LoginDAOImpl;
-import dto.userdto.UserSesseion;
-import exception.LoginWrongException;
+import dto.userdto.UserSession;
 import service.LoginService;
 import service.LoginServiceImpl;
 import view.FailView;
@@ -11,15 +8,15 @@ import view.FailView;
 public class LoginController {
     // 로그인 서비스 싱글톤으로
     private static LoginService loginService = LoginServiceImpl.getInstance();
-    public static UserSesseion signIn(String id, String pw) throws Exception {
-        UserSesseion userSesseion = null;
+    public static UserSession signIn(String id, String pw) throws Exception {
+        UserSession userSession = null;
         try {
-            userSesseion = loginService.login(id, pw);
+            loginService.login(id, pw);
         } catch (RuntimeException e) {
             FailView.errorMessage(e.getMessage());
             throw new Exception();
         }
-        return userSesseion;
+        return userSession;
     }
 
     public static void signUp(String id, String pw, String nickName) throws Exception {

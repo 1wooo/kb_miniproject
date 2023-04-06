@@ -2,17 +2,17 @@ package dto.userdto;
 
 public class UserDTO {
     private int uuid;
-    private String userid;
-    private String password;
-    private String nickname;
+    private String user_id;
+    private String pass_word;
+    private String nick_name;
     private boolean isAdmin;
     public UserDTO(){}
 
-    public UserDTO(int uuid, String userid, String password, String nickname, boolean isAdmin) {
+    public UserDTO(int uuid, String user_id, String pass_word, String nick_name, boolean isAdmin) {
         this.uuid = uuid;
-        this.userid = userid;
-        this.password = password;
-        this.nickname = nickname;
+        this.user_id = user_id;
+        this.pass_word = pass_word;
+        this.nick_name = nick_name;
         this.isAdmin = isAdmin;
     }
 
@@ -25,27 +25,27 @@ public class UserDTO {
     }
 
     public String getUserid() {
-        return userid;
+        return user_id;
     }
 
     public void setUserid(String userid) {
-        this.userid = userid;
+        this.user_id = userid;
     }
 
     public String getPassword() {
-        return password;
+        return pass_word;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.pass_word = password;
     }
 
     public String getNickname() {
-        return nickname;
+        return nick_name;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nick_name = nickname;
     }
 
     public boolean isAdmin() {
@@ -60,9 +60,9 @@ public class UserDTO {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("uuid=").append(uuid);
-        sb.append(", userid='").append(userid).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", nickname='").append(nickname).append('\'');
+        sb.append(", userid='").append(user_id).append('\'');
+        sb.append(", password='").append(pass_word).append('\'');
+        sb.append(", nickname='").append(nick_name).append('\'');
         sb.append(", isAdmin=").append(isAdmin);
         return sb.toString();
     }
