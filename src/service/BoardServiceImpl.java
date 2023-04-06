@@ -137,6 +137,25 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public int selectMyLikeCnt(int uuid) throws DMLException {
+		int myLikeCnt = boardDAO.selectMyLikeCnt(uuid);
+		return myLikeCnt;
+	}
+
+	@Override
+	public int selectMyContentCnt(int uuid) throws DMLException {
+		int myContentCnt = boardDAO.selectMyContentCnt(uuid);
+		return myContentCnt;
+	}
+
+	@Override
+	public int selectMyReplyCnt(int uuid) throws DMLException {
+		int myReplyCnt = boardDAO.selectMyReplyCnt(uuid);
+		return myReplyCnt;
+	}
+
+
+	@Override
 	public MealDTO selectTodayMeal() throws DMLException {
 		MealDTO mealDTO = boardDAO.selectTodayMeal();
 		if (mealDTO == null) {

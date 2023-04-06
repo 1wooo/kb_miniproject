@@ -131,6 +131,33 @@ public class BoardController {
         }
     }
 
+    public static void selectMyLikeCnt(int uuid) {
+        try {
+            boardService.selectMyLikeCnt(uuid);
+            // View에 출력 메소드 필요.
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
+    public static void selectMyContentCnt(int uuid) {
+        try {
+            boardService.selectMyContentCnt(uuid);
+            // View에 출력 메소드 필요.
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
+    public static void selectMyReplyCnt(int uuid) {
+        try {
+            boardService.selectMyReplyCnt(uuid);
+            // View에 출력 메소드 필요.
+        } catch (DMLException e) {
+            FailView.errorMessage(e.getMessage());
+        }
+    }
+
     public static void replyInsert(ReplyDTO replyDTO) {
         try {
             boardService.insertReply(replyDTO);
