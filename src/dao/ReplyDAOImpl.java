@@ -87,6 +87,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 			
 		}catch (Exception e) {
 			//e.printStackTrace();
+			System.out.println("들어감"+result);
 			throw new DMLException("댓글을 수정하는데 오류가 발생하여 수정되지 않았습니다.");
 		}finally {
 			DBManager.releaseConnection(con, ps);
@@ -104,6 +105,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 		int result=0;
 		String sql="delete from reply where reply_no = ?";
 		try {
+			System.out.println("들어옴");
 			con = DBManager.getConnection();
 			ps= con.prepareStatement(sql);
 			//?의 개수만큼 순서대로 setXxx설정 필요.
@@ -112,6 +114,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 			
 		}catch (SQLException e) {
 			//e.printStackTrace();
+			System.out.println("들어감"+result);
 			throw new DMLException("댓글 삭제에 실패했습니다.");
 		}finally {
 			DBManager.releaseConnection(con, ps);

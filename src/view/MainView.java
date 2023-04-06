@@ -17,7 +17,7 @@ public class MainView {
 	 * 메뉴 선택 (동작 선택)
 	 */
 	public static void menuChoice() {
-		
+
 		while (true) {
 			int selectionIndex = 1;
 			System.out.println("\n----------------------------------------");
@@ -32,7 +32,6 @@ public class MainView {
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
 			System.out.print(selectionIndex + ". 앱 종료 ]");
-			
 
 			System.out.println("\n--------------------------------------------");
 			System.out.println("원하는 작업을 숫자로 입력해주세요.");
@@ -88,7 +87,7 @@ public class MainView {
 		}
 
 	}
-	
+
 	/**
 	 * 게시판 조회 선택
 	 */
@@ -171,8 +170,10 @@ public class MainView {
 		String title = sc.nextLine();
 		System.out.println("수정할 게시글의 내용을 입력해주세요. 입력이 없으면 내용이 유지됩니다.");
 		String content = sc.nextLine();
-		if (!title.isBlank()) boardDTO.setTitle(title); 
-		if (!content.isBlank()) boardDTO.setContent(content); 
+		if (!title.isBlank())
+			boardDTO.setTitle(title);
+		if (!content.isBlank())
+			boardDTO.setContent(content);
 		BoardController.boardUpdate(boardDTO);
 	}
 
@@ -261,105 +262,107 @@ public class MainView {
 	public static void logOut() {
 		UserSession.getInstance().clear();
 	}
-	
+
 	/**
 	 * @author 서지수
 	 * @param 댓글 관련 뷰
 	 */
-	
+
 	/**
 	 * 댓글 메뉴 선택 (동작 선택)
 	 */
 	public static void replyChoice() {
-			int selectionIndex = 1;
-			System.out.println("\n----------------------------------------");
-			System.out.print("[ " + selectionIndex++ + ". 댓글 조회   ");
-			System.out.print(selectionIndex++ + ". 댓글 작성   ");
-			System.out.print(selectionIndex++ + ". 댓글 수정   ");
-			System.out.print(selectionIndex++ + ". 댓글 삭제  ");
+		int selectionIndex = 1;
+		System.out.println("\n----------------------------------------");
+		System.out.print("[ " + selectionIndex++ + ". 댓글 조회   ");
+		System.out.print(selectionIndex++ + ". 댓글 작성   ");
+		System.out.print(selectionIndex++ + ". 댓글 수정   ");
+		System.out.print(selectionIndex++ + ". 댓글 삭제  ");
 
-			System.out.println("\n--------------------------------------------");
-			System.out.println("원하는 작업을 숫자로 입력해주세요.");
-			try {
-				int menu = Integer.parseInt(sc.nextLine());
-				switch (menu) {
-				case 1: //댓글 조회
-					searchReply();
-					break;
-				case 2: //댓글 작성
-					insertReply();
-					break;
-				case 3: //댓글 수정
-					updateReply();
-					break;
-				case 4: //댓글 삭제
-					deleteReply();
-					break;
-				default:
-					throw new NumberFormatException();
-				}
-
-			} catch (NumberFormatException e) {
-				System.out.println("원하는 작업을 1 ~ " + selectionIndex + " 사이의 숫자로 입력해주세요.");
+		System.out.println("\n--------------------------------------------");
+		System.out.println("원하는 작업을 숫자로 입력해주세요.");
+		try {
+			int menu = Integer.parseInt(sc.nextLine());
+			switch (menu) {
+			case 1: // 댓글 조회
+				searchReply();
+				break;
+			case 2: // 댓글 작성
+				insertReply();
+				break;
+			case 3: // 댓글 수정
+				updateReply();
+				break;
+			case 4: // 댓글 삭제
+				deleteReply();
+				break;
+			default:
+				throw new NumberFormatException();
 			}
+
+		} catch (NumberFormatException e) {
+			System.out.println("원하는 작업을 1 ~ " + selectionIndex + " 사이의 숫자로 입력해주세요.");
 		}
+	}
 
-
-	
 	/**
 	 * 댓글 조회
 	 */
 	public static void searchReply() {
 		System.out.println("검색하려는 댓글의 부모 글번호 ?");
-  	  	int boardNo = Integer.parseInt(sc.nextLine());
+		int boardNo = Integer.parseInt(sc.nextLine());
 		ReplyController.replySelectByBoardNo(boardNo);
 	}
-	
+
 	/**
 	 * 댓글 작성
 	 */
 	public static void insertReply() {
 		System.out.println("작성하려는 댓글의 부모 글번호 ?");
-  	  	int boardNo = Integer.parseInt(sc.nextLine());
-  	  	
-    	 System.out.println("작성자?");
-    	 String writer = sc.nextLine();
-    	 
-    	 System.out.println("내용은?");
-    	 String content = sc.nextLine();
-    	 
-    	 ReplyDTO reply =  new ReplyDTO(0, writer, content, boardNo, null);
-    	 BoardController.replyInsert(reply);
+		int boardNo = Integer.parseInt(sc.nextLine());
+
+		System.out.println("작성자?");
+		String writer = sc.nextLine();
+
+		System.out.println("내용은?");
+		String content = sc.nextLine();
+
+		ReplyDTO reply = new ReplyDTO(0, UserSession.getInstance().getNickName(), content, boardNo, null);
+		BoardController.replyInsert(reply);
+//		
+//		BoardDTO board = new BoardDTO(title, content, UserSession.getInstance().getNickName(),
+//				UserSession.getInstance().getUuid(), subject);
+//		board.setTag(null);
+//		BoardController.boardInsert(board);
 	}
-	
+
 	/**
 	 * 댓글 수정
 	 */
 	public static void updateReply() {
 		System.out.println("수정하려는 댓글의 부모 글번호 ?");
-  	  	int boardNo = Integer.parseInt(sc.nextLine());
-  	  	
-	 	 System.out.println("수정할 댓글 번호는?");
-    	 int no = Integer.parseInt(sc.nextLine());
-    	 
-    	 System.out.println("수정 내용은?");
-    	 String content = sc.nextLine();
-    	
-    	 ReplyDTO reply =  new ReplyDTO(no, null, content, boardNo, null);
-    	 ReplyController.replyUpdate(reply);
+		int boardNo = Integer.parseInt(sc.nextLine());
+
+		System.out.println("수정할 댓글 번호는?");
+		int no = Integer.parseInt(sc.nextLine());
+
+		System.out.println("수정 내용은?");
+		String content = sc.nextLine();
+
+		ReplyDTO reply = new ReplyDTO(no, null, content, boardNo, null);
+		ReplyController.replyUpdate(reply);
 	}
-	
+
 	/**
 	 * 댓글 삭제
 	 */
 	public static void deleteReply() {
-		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
-  	  	int boardNo = Integer.parseInt(sc.nextLine());
-  	  	
-	  	 System.out.println("삭제할 댓글 번호는?");
-    	 int no = Integer.parseInt(sc.nextLine());
-    	 ReplyController.replyDelete(no);
+//		System.out.println("삭제하려는 댓글의 부모 글번호 ?");
+//		int boardNo = Integer.parseInt(sc.nextLine());
+
+		System.out.println("삭제할 댓글 번호는?");
+		int no = Integer.parseInt(sc.nextLine());
+		ReplyController.replyDelete(no);
 	}
-	
 
 }
