@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
@@ -175,4 +176,11 @@ public class BoardController {
 		}
 	}
 
+	public static void insertTodayMeal(MealDTO mealDTO) {
+		try {
+			boardService.insertTodayMeal(mealDTO);
+		} catch (DMLException e) {
+			FailView.errorMessage(e.getMessage());
+		}
+	}
 }

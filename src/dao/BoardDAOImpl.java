@@ -516,6 +516,29 @@ public class BoardDAOImpl implements BoardDAO {
 		return myreplyCnt;
 	}
 
+	@Override
+	public int insertTodayMeal(MealDTO mealDTO) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "insert into meal VALUES(?, ?)";
+		int res = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, mealDTO.getDate());
+			ps.setString(2, mealDTO.getMeal());
+
+			res = ps.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DMLException("메뉴 등록 실패");
+		}finally {
+			DBManager.releaseConnection(con, ps);
+		}
+		return res;
+	}
+
 
 	@Override
 	public MealDTO selectTodayMeal() throws DMLException {

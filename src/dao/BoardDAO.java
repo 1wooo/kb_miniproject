@@ -104,6 +104,11 @@ public interface BoardDAO {
 	int selectMyReplyCnt(int uuid) throws DMLException;
 
 	/**
+	 * 식사 업데이트
+	 */
+	int insertTodayMeal(MealDTO mealDTO) throws DMLException;
+
+	/**
 	 * 식사 가져오기
 	 */
 	MealDTO selectTodayMeal() throws DMLException;

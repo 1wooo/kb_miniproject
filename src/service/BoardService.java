@@ -96,6 +96,13 @@ public interface BoardService {
 	MealDTO selectTodayMeal() throws DMLException;
 
 	/**
+	 * 식사 등록
+	 * @param mealDTO
+	 * @throws DMLException
+	 */
+	void insertTodayMeal(MealDTO mealDTO) throws DMLException;
+
+	/**
 	 * 부모글에 해당하는 댓글 리스트 가져오기
 	 */
 	List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException;

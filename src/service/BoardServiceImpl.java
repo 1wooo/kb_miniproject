@@ -165,6 +165,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public void insertTodayMeal(MealDTO mealDTO) throws DMLException {
+		int res = boardDAO.insertTodayMeal(mealDTO);
+		if (res == 0) throw new DMLException("메뉴 등록 실패");
+	}
+
+
+	@Override
 	public List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException {
 		// TODO Auto-generated method stub
 		return null;
