@@ -63,12 +63,64 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException {
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from (select * from boarddto order by like_cnt desc) where rownum <= 5";
+
+		List<BoardDTO> toplikeBoard = new ArrayList<>();
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				BoardDTO boardDTO = new BoardDTO(rs.getInt("board_no"), rs.getString("title"), rs.getString("content"),
+						rs.getString("writer"), rs.getInt("uuid"), rs.getString("subject"), rs.getString("tag"),
+						rs.getInt("like_cnt"), rs.getInt("view_cnt"), rs.getString("board_date"));
+
+				toplikeBoard.add(boardDTO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DMLException("좋아요 랭크 조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+
+		return toplikeBoard;
 	}
 
 	@Override
 	public List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException {
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from (select * from boarddto order by view_cnt desc) where rownum <= 5";
+
+		List<BoardDTO> toplikeBoard = new ArrayList<>();
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				BoardDTO boardDTO = new BoardDTO(rs.getInt("board_no"), rs.getString("title"), rs.getString("content"),
+						rs.getString("writer"), rs.getInt("uuid"), rs.getString("subject"), rs.getString("tag"),
+						rs.getInt("like_cnt"), rs.getInt("view_cnt"), rs.getString("board_date"));
+
+				toplikeBoard.add(boardDTO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DMLException("조회수 랭크 조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+
+		return toplikeBoard;
 	}
 
 

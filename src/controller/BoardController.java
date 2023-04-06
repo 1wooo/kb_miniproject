@@ -24,11 +24,21 @@ public class BoardController {
     }
 
     public static void boardSelectRankByLikeCnt() {
-
+        try {
+            List<BoardDTO> boardList = boardService.boardSelectRankByLikeCnt();
+            SuccessView.boardListPrint(boardList, 1);
+        } catch (SearchWrongException e) {
+            FailView.errorMessage(e.getMessage());
+        }
     }
 
     public static void boardSelectRankByViewCnt() {
-
+        try {
+            List<BoardDTO> boardList = boardService.boardSelectRankByViewCnt();
+            SuccessView.boardListPrint(boardList, 1);
+        } catch (SearchWrongException e) {
+            FailView.errorMessage(e.getMessage());
+        }
     }
 
 

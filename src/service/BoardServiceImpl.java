@@ -38,12 +38,18 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException {
-		return null;
+		List<BoardDTO> boardList = boardDAO.boardSelectRankByLikeCnt();
+		if (boardList.size() == 0)
+			throw new SearchWrongException("랭크 조회할 게시글이 없어요...");
+		return boardList;
 	}
 
 	@Override
 	public List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException {
-		return null;
+		List<BoardDTO> boardList = boardDAO.boardSelectRankByViewCnt();
+		if (boardList.size() == 0)
+			throw new SearchWrongException("랭크 조회할 게시글이 없어요...");
+		return boardList;
 	}
 
 	@Override
