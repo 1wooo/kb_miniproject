@@ -18,6 +18,10 @@ public interface BoardDAO {
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
 
+	List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException;
+
+	List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException;
+
 	/**
 	 * 레코드 유저 아이디별 검색 select * from boarddto where userId=?;
 	 */

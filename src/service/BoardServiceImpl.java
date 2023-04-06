@@ -35,7 +35,17 @@ public class BoardServiceImpl implements BoardService {
 
 		return boardList;
 	}
-	
+
+	@Override
+	public List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException {
+		return null;
+	}
+
+	@Override
+	public List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException {
+		return null;
+	}
+
 	@Override
 	public List<BoardDTO> boardSelectByUserId(int uuid) throws SearchWrongException {
 		List<BoardDTO> boardList = boardDAO.boardSelectByUserId(uuid);

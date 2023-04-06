@@ -13,7 +13,10 @@ public interface BoardService {
 	 * 모든 게시글 레코드 검색
 	 */
 	List<BoardDTO> boardSelectAll() throws SearchWrongException;
-	
+
+	List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException;
+
+	List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException;
 	/** 
 	 * 특정 uuid인 유저의 게시글 레코드 검색
 	 * */

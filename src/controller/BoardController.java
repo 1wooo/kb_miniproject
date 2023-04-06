@@ -22,7 +22,17 @@ public class BoardController {
             FailView.errorMessage(e.getMessage());
         }
     }
-     
+
+    public static void boardSelectRankByLikeCnt() {
+
+    }
+
+    public static void boardSelectRankByViewCnt() {
+
+    }
+
+
+
     public static void boardSelectByUserId(int uuid) {
     	try {
     		List<BoardDTO> boardList = boardService.boardSelectByUserId(uuid);

@@ -62,6 +62,17 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public List<BoardDTO> boardSelectRankByLikeCnt() throws SearchWrongException {
+		return null;
+	}
+
+	@Override
+	public List<BoardDTO> boardSelectRankByViewCnt() throws SearchWrongException {
+		return null;
+	}
+
+
+	@Override
 		public List<BoardDTO> boardSelectByUserId(int userId) throws SearchWrongException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -334,7 +345,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public int updateLikeCnt(int boardNo) throws DMLException {
 		Connection con = null;
 		PreparedStatement st = null;
-		String sql = "update boarddto set like_cnt = like_cnt WHERE board_no = ?";
+		String sql = "update boarddto set like_cnt = like_cnt + 1 WHERE board_no = ?";
 		int res = 0;
 
 		try {
@@ -357,7 +368,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public int updateViewCnt(int boardNo) throws DMLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "upadte boarddto set view_cnt = view_cnt + 1 WHERE board_no = ?";
+		String sql = "update boarddto set view_cnt = view_cnt + 1 WHERE board_no = ?";
 		int res = 0;
 
 		try {
