@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.replydto.ReplyDTO;
 import dto.userdto.UserSession;
 import exception.DMLException;
@@ -328,5 +329,77 @@ public class BoardDAOImpl implements BoardDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int updateLikeCnt(int boardNo) throws DMLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		String sql = "update boarddto set like_cnt = like_cnt WHERE board_no = ?";
+		int res = 0;
+
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement(sql);
+
+			st.setInt(1, boardNo);
+			res = st.executeUpdate();
+		} catch (SQLException e) {
+//			e.printStackTrace();
+			throw new DMLException("좋아요 반영 실패");
+		} finally {
+			DBManager.releaseConnection(con, st);
+		}
+
+		return res;
+	}
+
+	@Override
+	public int updateViewCnt(int boardNo) throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = "upadte boarddto set view_cnt = view_cnt + 1 WHERE board_no = ?";
+		int res = 0;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, boardNo);
+			res = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DMLException("조회 실패");
+		} finally {
+			DBManager.releaseConnection(con, ps);
+		}
+
+		return res;
+	}
+
+	@Override
+	public MealDTO selectTodayMeal() throws DMLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from meal where to_char(today_date) = to_char(sysdate)";
+		MealDTO mealDTO = null;
+
+		try {
+			con = DBManager.getConnection();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				mealDTO = new MealDTO(rs.getString(1), rs.getString(2));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DMLException("메뉴 조회에 실패하였습니다.");
+		} finally {
+			DBManager.releaseConnection(con, ps, rs);
+		}
+		return mealDTO;
+	}
+
 
 }

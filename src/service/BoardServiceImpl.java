@@ -6,6 +6,7 @@ package service;
 import java.util.List;
 
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.replydto.ReplyDTO;
 import exception.DMLException;
 import exception.SearchWrongException;
@@ -108,10 +109,32 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public void updateLikeCnt(int boardNo) throws DMLException {
+		int res = boardDAO.updateLikeCnt(boardNo);
+		if (res == 0) throw new DMLException("좋아요 반영 실패");
+	}
+
+	@Override
+	public void updateViewCnt(int boardNo) throws DMLException {
+		int res = boardDAO.updateViewCnt(boardNo);
+		if (res == 0) throw new DMLException("조회 실패");
+	}
+
+	@Override
+	public MealDTO selectTodayMeal() throws DMLException {
+		MealDTO mealDTO = boardDAO.selectTodayMeal();
+		if (mealDTO == null) {
+			throw new DMLException("메뉴 조회에 실패했습니다.");
+		}
+		return mealDTO;
+	}
+
+	@Override
 	public List<ReplyDTO> replySelectByParentNo(int boardNo) throws SearchWrongException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 
 }
