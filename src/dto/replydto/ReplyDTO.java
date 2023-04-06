@@ -1,7 +1,7 @@
 package dto.replydto;
 
 /**
- * @author 서지수
+ * @author 서지수, 임재현
  * @param ReplyDTO 댓글
  */
 public class ReplyDTO {
@@ -9,6 +9,7 @@ public class ReplyDTO {
 	private String replyWriter;
 	private String replyContent;
 	private int boardNo;
+	private int uuid;
 	private String replyDate;
 
 	public ReplyDTO() {
@@ -72,5 +73,13 @@ public class ReplyDTO {
 		sb.append(", 작성 날짜'").append(replyDate).append('\'');
 		sb.append(" ]");
 		return sb.toString();
+	}
+
+	public int getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(int uuid) {
+		this.uuid = uuid;
 	}
 }
