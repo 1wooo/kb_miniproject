@@ -28,7 +28,7 @@ public class MainView {
 			System.out.print(selectionIndex++ + ". 마이페이지   ");
 			System.out.print(selectionIndex++ + ". 로그아웃   ");
 			System.out.print(selectionIndex++ + ". 오늘의 식단   ");
-			System.out.print(selectionIndex++ + ". 댓글정보검색  ");
+			System.out.print(selectionIndex++ + ". 댓글 작업  ");
 			if (UserSession.getInstance().isAdmin())
 				System.out.print(selectionIndex++ + ". 오늘의 식단 등록하기   ");
 			System.out.print(selectionIndex + ". 앱 종료 ]");
