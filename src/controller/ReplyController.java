@@ -24,8 +24,9 @@ public class ReplyController {
 	 */
 	public static void replySelectByBoardNo(int boardNo) {
 		try {
-			List<ReplyDTO> replyDTO = replyService.replySelectByBoardNo(boardNo);
-		    SuccessView.messagePrint("댓글 조회에 성공했습니다.");
+			List<ReplyDTO> replyList = replyService.replySelectByBoardNo(boardNo);
+			// TODO: need Reply view
+			SuccessView.searchReplyPrint(replyList);
 		  
 		}catch (SearchWrongException e) {
 			//e.printStackTrace();

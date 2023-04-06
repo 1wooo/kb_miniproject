@@ -6,6 +6,7 @@ import java.util.Scanner;
 import controller.BoardController;
 import dto.boarddto.BoardDTO;
 import dto.userdto.UserSession;
+import dto.replydto.ReplyDTO;
 
 public class SuccessView {
 	public static String getPreview(BoardDTO board) { // 특정 게시글의 미리보기를 제공
@@ -120,4 +121,15 @@ public class SuccessView {
 		System.out.println(message);
 	}
 
+	/**
+	 * @author 서지수
+	 * @param 댓글 조회, 생성, 수정, 삭제 성공 뷰
+	 */
+	
+	public static void searchReplyPrint(List<ReplyDTO> replyList) {
+		for(ReplyDTO reply : replyList) {
+			System.out.println(" ⁕⁕⁕ " + reply );
+		}
+	}
+	
 }
