@@ -137,7 +137,7 @@ public class BoardDTO {
 		sb.append("작성자 ").append(String.format("%-10s", writer)).append(" | ");
 		sb.append("조회수 ").append(String.format("%-4s", viewCnt));
 		sb.append("좋아요 ").append(String.format("%-4s", likeCnt)).append(" | ");
-		sb.append("작성일자 ").append(String.format("%-10s", boardDate)).append("\n---------------------------------------------------\n");
+		sb.append("작성일자 ").append(String.format("%-10s", boardDate)).append("\n--------------------------내용-------------------------\n");
 		sb.append(content).append("\n");
 
 		return sb.toString();

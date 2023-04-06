@@ -6,6 +6,7 @@ import java.util.Scanner;
 import controller.BoardController;
 import controller.ReplyController;
 import dto.boarddto.BoardDTO;
+import dto.mealdto.MealDTO;
 import dto.userdto.UserSession;
 
 public class SuccessView {
