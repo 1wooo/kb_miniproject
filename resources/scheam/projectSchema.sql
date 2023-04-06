@@ -19,23 +19,23 @@ create table BOARDDTO(
     selected_reply int unique
 ); 
 
-ALTER TABLE BOARDDTO ADD CONSTRAINT fk_reply_no foreign KEY(selected_reply) references REPLY (selected_reply) ON DELETE CASCADE;
+ALTER TABLE BOARDDTO ADD CONSTRAINT fk_reply_no foreign KEY(selected_reply) references REPLY (reply_no) ON DELETE CASCADE;
 
 --DROP sequence board_seq;
 create sequence board_seq nocache; 
 --공지 notice 
-insert into BOARDDTO values (board_seq.nextval, '수업시작시간','수업은 9시에 시작됩니다. 지각하지 마세요', '희정샘', 31, 'notice','#중요', 2, 2, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '시험공지','다음주 시험이 있습니다. 내용은 오픈북입니다.', '희정샘', 31, 'notice','#긴급', 0, 6, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '휴강공지','4월 21일 휴강 예정입니다.', '이프로', 32, 'notice','#휴강', 12, 6, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '수업시작시간','수업은 9시에 시작됩니다. 지각하지 마세요', '희정샘', 5, 'notice','#중요', 2, 2, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '시험공지','다음주 시험이 있습니다. 내용은 오픈북입니다.', '희정샘', 5, 'notice','#긴급', 0, 6, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '휴강공지','4월 21일 휴강 예정입니다.', '이프로', 6, 'notice','#휴강', 12, 6, sysdate,null,null);
 
 --자유 free
-insert into BOARDDTO values (board_seq.nextval, '신난다','팀프로젝트하기 신남', '지수', 28, 'free','#신남', 0, 1, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '날씨','날씨 너무 좋다. 나가서 놀고 싶다', '재현', 27, 'free','#벚꽃', 1, 1, sysdate,null,null);
-insert into BOARDDTO values (board_seq.nextval, '축구','하고 싶다', '주호',29, 'free','#축구', 3, 3, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '신난다','팀프로젝트하기 신남', '지수', 2, 'free','#신남', 0, 1, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '날씨','날씨 너무 좋다. 나가서 놀고 싶다', '재현', 1, 'free','#벚꽃', 1, 1, sysdate,null,null);
+insert into BOARDDTO values (board_seq.nextval, '축구','하고 싶다', '주호', 3, 'free','#축구', 3, 3, sysdate,null,null);
 
 --질문 question
-insert into BOARDDTO values (board_seq.nextval, '질문있습니다.','자바 너무 어려워요', '지수', 28, 'question','#자바', 1, 1, sysdate,'N',null);
-insert into BOARDDTO values (board_seq.nextval, '질문','지각하면 어떻게 되나요?', '지수', 28, 'question','#질문', 0, 1, sysdate,'N',null);
+insert into BOARDDTO values (board_seq.nextval, '질문있습니다.','자바 너무 어려워요', '지수', 2, 'question','#자바', 1, 1, sysdate,'N',null);
+insert into BOARDDTO values (board_seq.nextval, '질문','지각하면 어떻게 되나요?', '지수', 2, 'question','#질문', 0, 1, sysdate,'N',null);
 
 select * from BOARDDTO;
 
@@ -47,17 +47,17 @@ create table REPLY(
   board_no int references BOARDDTO(board_no), --댓글을 달 부모글번호
   uuid int references USERDTO(uuid),--유저 아이디
   reply_date date, --등록일
-  selected_reply int unique
+  is_selected char(1) --댓글 채택 여부
 );
 
 --drop sequence reply_seq;
 create sequence reply_seq nocache; 
 
-insert into REPLY values (reply_seq.nextval, '재현','그러게', 45,27, sysdate,null);
-insert into REPLY values (reply_seq.nextval, '원우','나두', 45,30, sysdate,null);
-insert into REPLY values (reply_seq.nextval, '지수','나가자!', 45,28, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '재현','그러게', 6,1, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '원우','나두', 6,4, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '지수','나가자!', 6,2, sysdate,null);
 --질문게시판
-insert into REPLY values (reply_seq.nextval, '이프로','3번 지각하면 1번 결석이 됩니다.', 47,32, sysdate,null);
+insert into REPLY values (reply_seq.nextval, '이프로','3번 지각하면 1번 결석이 됩니다.', 8,2, sysdate,'N');
 --delete from reply where reply_no=25; 
 
 select * from REPLY;
