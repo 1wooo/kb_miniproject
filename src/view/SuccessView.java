@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controller.BoardController;
+import controller.ReplyController;
 import dto.boarddto.BoardDTO;
 import dto.userdto.UserSession;
 
